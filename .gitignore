@@ -1,0 +1,11 @@
+#danger
+.env
+
+# dependencies
+/node_modules
+
+# production
+/dist
+
+#others
+/src/logs/*

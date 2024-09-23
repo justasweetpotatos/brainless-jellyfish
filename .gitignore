@@ -2,10 +2,11 @@
 .env
 
 # dependencies
-/node_modules
+node_modules
 
 # production
 /dist
 
 #others
 /src/logs/*
+package-lock.json

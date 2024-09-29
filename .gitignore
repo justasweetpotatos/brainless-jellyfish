@@ -9,4 +9,3 @@ node_modules
 
 #others
 /src/logs/*
-package-lock.json

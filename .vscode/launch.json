@@ -1,0 +1,15 @@
+{
+    "version": "0.3.0",
+    "configurations": [
+      {
+        "command": "npm start",
+        "name": "Run dashboard",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+    ],
+    "scripts": {
+      "start": "npm index.tsx"
+    }
+  }
+  

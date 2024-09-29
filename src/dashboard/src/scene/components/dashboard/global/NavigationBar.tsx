@@ -1,6 +1,6 @@
 import { Box, Icon, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../theme";
+import { ColorModeContext, tokens } from "../../../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlined from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlined from "@mui/icons-material/DarkModeOutlined";
@@ -24,7 +24,9 @@ function NavigationBar() {
       </Box>
 
       <Box>
-        <IconButton onClick={colorMode.toggleColorMode}>{theme.palette.mode === "dark" ? <DarkModeOutlined /> : <LightModeOutlined />}</IconButton>
+        <IconButton onClick={colorMode.toggleColorMode}>
+          {theme.palette.mode === "dark" ? <DarkModeOutlined /> : <LightModeOutlined />}
+        </IconButton>
         <IconButton>
           <NotificationsOutlined />
         </IconButton>

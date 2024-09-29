@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, Typography, useTheme } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { tokens } from "../../theme";
+import { tokens } from "../../../../theme";
 import {
   HomeOutlined as HomeOutlinedIcon,
   PeopleOutlined as PeopleOutlinedIcon,
@@ -53,7 +53,7 @@ const Item: React.FC<ItemProps> = ({ title, to, icon, selected, setSelected }) =
 
   useEffect(() => {
     if (selected === title) {
-      document.title = `${title} - My App`; // Set tab title dynamically
+      document.title = `${title} - My App`;
     }
   }, [selected, title]);
 
@@ -83,7 +83,7 @@ function GlobalSideBar() {
   useEffect(() => {
     // Set the initial selected item based on the current path
     const currentPath = location.pathname;
-    const currentRoute = dashboardRouteList.find(route => route.to === currentPath);
+    const currentRoute = dashboardRouteList.find((route) => route.to === currentPath);
     if (currentRoute) {
       setSelected(currentRoute.title);
     } else {
@@ -177,7 +177,14 @@ function GlobalSideBar() {
 
           <Box paddingLeft={isCollapsed ? undefined : "3%"} paddingTop={`5%`}>
             {dashboardRouteList.map((route) => (
-              <Item key={route.title} title={route.title} to={route.to} icon={route.icon} selected={selected} setSelected={setSelected} />
+              <Item
+                key={route.title}
+                title={route.title}
+                to={route.to}
+                icon={route.icon}
+                selected={selected}
+                setSelected={setSelected}
+              />
             ))}
           </Box>
         </Menu>

@@ -7,9 +7,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": ""
+    "start": "react-scripts start"
   },
   "dependencies": {
     "assert": "^2.1.0",

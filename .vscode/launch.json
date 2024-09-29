@@ -1,15 +1,20 @@
 {
-    "version": "0.3.0",
-    "configurations": [
-      {
-        "command": "npm start",
-        "name": "Run dashboard",
-        "request": "launch",
-        "type": "node-terminal"
-      },
-    ],
-    "scripts": {
-      "start": "npm index.tsx"
+  "version": "0.3.0",
+  "configurations": [
+    {
+      "command": "npm start",
+      "name": "run bot service",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm test",
+      "name": "test",
+      "request": "launch",
+      "type": "node-terminal"
     }
+  ],
+  "scripts": {
+    "start": "npm index.js"
   }
-  
+}

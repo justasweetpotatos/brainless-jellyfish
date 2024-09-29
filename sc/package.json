@@ -1,0 +1,41 @@
+{
+  "name": "suwa_bot_js",
+  "version": "0.3.0",
+  "private": true,
+  "dependencies": {
+    "@discordjs/voice": "^0.17.0",
+    "@distube/ytdl-core": "^4.14.4",
+    "axios": "^1.6.7",
+    "discord.js": "^14.12.1",
+    "distube": "^5.0.2",
+    "dotenv": "^16.4.5",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
+    "yt-stream": "^1.7.3"
+  },
+  "scripts": {
+    "start": "node ./src/index.js",
+    "build": "node build",
+    "test": "node ./test/test.js",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

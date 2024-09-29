@@ -1,0 +1,9 @@
+{
+  "config": {
+    "host": "localhost",
+    "user": "root",
+    "password": "SuwaClient@mysql",
+    "port": 3305,
+    "dialect": "mysql"
+  }
+}

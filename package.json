@@ -6,11 +6,12 @@
   },
   "devDependencies": {
     "@types/mysql": "^2.15.26",
+    "@types/node": "^22.7.4",
     "dotenv": "^16.4.5",
     "webpack": "^5.95.0"
   },
   "scripts": {
-    "start": "npx ts-node index.ts"
+    "start": "ts-node src/index.ts"
   },
   "name": "webpack",
   "version": "1.0.0",

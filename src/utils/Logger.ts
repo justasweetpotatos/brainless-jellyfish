@@ -1,118 +1,124 @@
 import * as path from "path";
 import * as fs from "fs";
+import LogMessageType from "./enums/LogMessageType";
 
-function getTimestamp(): string {
-  const now = new Date();
-  return now.toISOString().replace(/T/, " ").replace(/\..+/, "");
+function getStringTimestamp(date?: Date): string {
+  return (date ?? new Date()).toISOString().replace(/T/, " ").replace(/\..+/, "");
 }
 
-class LoggerColors {
-  static Reset = "\x1b[0m";
-  static Bright = "\x1b[1m";
-  static Dim = "\x1b[2m";
-  static Underscore = "\x1b[4m";
-  static Blink = "\x1b[5m";
-  static Reverse = "\x1b[7m";
-  static Hidden = "\x1b[8m";
+class LogToFileSystem {
+  public systemCreateTimestamp: Date;
+  private logDir: string;
+  private logFile: string;
 
-  static FgBlack = "\x1b[30m";
-  static FgRed = "\x1b[31m";
-  static FgGreen = "\x1b[32m";
-  static FgYellow = "\x1b[33m";
-  static FgBlue = "\x1b[34m";
-  static FgMagenta = "\x1b[35m";
-  static FgCyan = "\x1b[36m";
-  static FgWhite = "\x1b[37m";
-  static FgGray = "\x1b[90m";
+  constructor() {
+    this.systemCreateTimestamp = new Date();
 
-  static BgBlack = "\x1b[40m";
-  static BgRed = "\x1b[41m";
-  static BgGreen = "\x1b[42m";
-  static BgYellow = "\x1b[43m";
-  static BgBlue = "\x1b[44m";
-  static BgMagenta = "\x1b[45m";
-  static BgCyan = "\x1b[46m";
-  static BgWhite = "\x1b[47m";
-  static BgGray = "\x1b[100m";
+    this.logDir = path.join(__dirname, "log");
+    this.logFile = path.join(
+      this.logDir,
+      this.systemCreateTimestamp.toISOString().replace(/T/g, " ").replace(/[:]/g, "-").slice(0, -4) + "txt"
+    );
+
+    if (!fs.existsSync(this.logDir)) fs.mkdirSync(this.logDir);
+    if (!fs.existsSync(this.logFile))
+      fs.writeFileSync(
+        this.logFile,
+        `This is log create by client, created time is ${getStringTimestamp(this.systemCreateTimestamp)}.\n`
+      );
+  }
+
+  /**
+   * Write message to log file
+   */
+  write(content: string) {
+    fs.appendFileSync(this.logFile, content + "\n");
+  }
 }
 
 class Logger {
-  public componentName: string;
-  public loggerFilePath: string;
-  public loggerComponentName: string = "Logger";
+  public readonly label: string;
+  public readonly system: LogToFileSystem;
 
-  constructor(componentName: string, loggerFilePath: string) {
-    this.componentName = componentName;
-    this.loggerFilePath = loggerFilePath;
+  /**
+   *
+   * @param {string} label Component label
+   * @param {LogToFileSystem} system Write to file system
+   */
+  constructor(label: string, system: LogToFileSystem) {
+    this.label = label;
+    this.system = system;
   }
 
-  static createLogFile() {
-    try {
-      const timeCreate = new Date().toLocaleString().replace(/:/g, "-").replace(/\//g, "-");
-      const logFilePath = path.join(__dirname, `../logs/${timeCreate}.txt`);
+  print(content: string, type: LogMessageType | LogMessageType.LOG, printToFile?: boolean) {
+    const logTimestamp = `${getStringTimestamp()}`;
 
-      if (!fs.existsSync(logFilePath)) {
-        fs.appendFileSync(logFilePath, "", "utf-8");
-      }
+    const message = `[${logTimestamp}][${this.label.toUpperCase()}][${type.toUpperCase()}] ${content}`;
 
-      return logFilePath;
-    } catch (error) {
-      return "";
+    if (printToFile ?? true) this.system.write(message);
+
+    switch (type) {
+      case LogMessageType.LOG:
+        console.log(message);
+        break;
+      case LogMessageType.WARN:
+        console.warn(message);
+        break;
+      case LogMessageType.INFO:
+        console.info(message);
+        break;
+      case LogMessageType.SUCCESS:
+        console.info(message); // temp
+        break;
+      case LogMessageType.ERROR:
+        console.error(message);
+        break;
+      default:
+        console.log(message);
+        break;
     }
   }
 
-  writeToLogFile(lines: string[], logFilePath: string) {}
-
-  lineFiller(input: string, lineLength: number = 150): string[] {
-    let lines: string[] = [];
-    let position = 0;
-
-    while (position < input.length) {
-      let line = input.slice(position, position + lineLength);
-      line = line.padEnd(lineLength, " ");
-      lines.push(line);
-      position += lineLength;
-    }
-
-    return lines;
+  /**
+   *
+   * @param {string} message
+   * @param {boolean} printToFile
+   */
+  log(message: string, printToFile?: boolean) {
+    this.print(message, LogMessageType.LOG, printToFile);
   }
-
-  print(message: string, tagName: string, color: string) {
-    const timeCreate = `[${getTimestamp()}]`;
-
-    let finalMessage = `${timeCreate}[${tagName}][${this.componentName}]: ${message}`;
-
-    if (tagName === "ERROR") {
-      console.log(color + finalMessage + LoggerColors.Reset);
-    } else {
-      let lines = this.lineFiller(color + finalMessage + LoggerColors.Reset);
-      lines.forEach((line) => {
-        console.log(line);
-      });
-    }
-
-    fs.appendFileSync(this.loggerFilePath, finalMessage + "\n", "utf-8");
+  /**
+   *
+   * @param {string} message
+   * @param {boolean} printToFile
+   */
+  info(message: string, printToFile?: boolean) {
+    this.print(message, LogMessageType.INFO, printToFile);
   }
-
-  log(message: string) {
-    this.print(message, "LOG", LoggerColors.FgGray);
+  /**
+   *
+   * @param {string} message
+   * @param {boolean} printToFile
+   */
+  success(message: string, printToFile?: boolean) {
+    this.print(message, LogMessageType.SUCCESS, printToFile);
   }
-
-  info(message: string) {
-    this.print(message, "INFO", LoggerColors.BgGray);
+  /**
+   *
+   * @param {string} message
+   * @param {boolean} printToFile
+   */
+  warn(message: string, printToFile?: boolean) {
+    this.print(message, LogMessageType.WARN, printToFile);
   }
-
-  success(message: string) {
-    this.print(message, "SUCCESS", LoggerColors.FgGreen);
-  }
-
-  warn(message: string) {
-    this.print(message, "WARN", LoggerColors.FgYellow);
-  }
-
-  error(message: string) {
-    this.print(message, "ERROR", LoggerColors.FgRed);
+  /**
+   *
+   * @param {string} message
+   * @param {boolean} printToFile
+   */
+  error(message: string, printToFile?: boolean) {
+    this.print(message, LogMessageType.ERROR, printToFile ?? true);
   }
 }
 
-export default Logger;
+export { LogToFileSystem, Logger };

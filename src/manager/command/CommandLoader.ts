@@ -10,7 +10,7 @@ import {
   SlashCommandSubcommandGroupBuilder,
 } from "discord.js";
 import SuwaClient from "../../bot";
-import Logger from "../../utils/Logger";
+import { Logger } from "../../utils/Logger";
 
 enum CommandLoaderErrorCode {
   INVALID_BUILDER_DATA_TYPE = 101,
@@ -51,7 +51,7 @@ class CommandLoader {
 
   constructor(client: SuwaClient) {
     this.client = client;
-    this.logger = new Logger("CommandLoader", client.loggerFilePath);
+    this.logger = new Logger("CommandLoader", this.client.logSystem);
 
     this.commands = new Collection();
     this.executors = new Collection();

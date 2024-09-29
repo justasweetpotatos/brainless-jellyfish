@@ -2,7 +2,7 @@ import { Collection, CommandInteraction, Routes } from "discord.js";
 
 import SuwaClient from "../../bot";
 import CommandLoader from "./CommandLoader";
-import Logger from "../../utils/Logger";
+import { Logger } from "../../utils/Logger";
 
 interface GuildConfig {
   id: string;
@@ -20,7 +20,7 @@ class CommandManager {
 
   constructor(client: SuwaClient) {
     this.client = client;
-    this.logger = new Logger("CommandManager", client.loggerFilePath);
+    this.logger = new Logger("CommandManager", client.logSystem);
 
     this.commandLoader = new CommandLoader(this.client);
   }

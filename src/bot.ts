@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, GatewayIntentBits, version } from "discord.js";
 
-import Logger from "./utils/Logger";
+import { Logger, LogToFileSystem } from "./utils/Logger";
 import ConnectionManager from "./manager/connectorManager";
 import CommandManager from "./manager/command/commandManager";
 import ClientGuildManager from "./manager/guild/GuildManager";
@@ -13,7 +13,7 @@ class SuwaClient extends Client {
   public clientGuildManager: ClientGuildManager;
 
   public logger: Logger;
-  public loggerFilePath: string;
+  public logSystem: LogToFileSystem;
 
   constructor(clientId: string) {
     super({
@@ -27,8 +27,8 @@ class SuwaClient extends Client {
 
     this.clientId = clientId;
 
-    this.loggerFilePath = Logger.createLogFile();
-    this.logger = new Logger("Client", this.loggerFilePath);
+    this.logSystem = new LogToFileSystem();
+    this.logger = new Logger("Client", this.logSystem);
 
     this.connManager = new ConnectionManager(this);
     this.comManager = new CommandManager(this);
@@ -53,7 +53,7 @@ class SuwaClient extends Client {
 
     await this.login(token);
 
-    await this.connectDb();
+    // await this.connectDb();
     await this.comManager.initialize();
 
     this.on("interactionCreate", (interaction) => {
@@ -65,7 +65,9 @@ class SuwaClient extends Client {
 
   async connectDb() {
     try {
-      await this.connManager.createMainConnection();
+      this.logger.log("Initialization root connect to database...");
+      this.connManager.createRootConnection();
+      this.logger.log("Database connection good! Continue.");
     } catch (error) {
       error instanceof Error
         ? this.logger.error(`Connect to database failed: ${error}`)

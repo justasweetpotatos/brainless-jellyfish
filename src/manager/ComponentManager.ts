@@ -1,4 +1,4 @@
-import path = require("path");
+import * as path from "path";
 import * as fs from "fs";
 import { ButtonInteraction, Collection } from "discord.js";
 import SuwaClient from "../bot";
@@ -26,8 +26,11 @@ class ComponentManager {
   getButtonData(customId: string): ButtonData {
     const buttonData = this.buttonCollection.get(customId);
     if (buttonData) return buttonData;
-    else
-      throw new ClientError(`No button with id: connecting-word-set-channel-button`, ErrorCode.LOAD_COMPONENT_FAILED);
+    else throw new ClientError(`No button with id: ${customId}`, ErrorCode.LOAD_COMPONENT_FAILED);
+  }
+
+  loadComponents() {
+    this.loadButtonComponents();
   }
 
   loadButtonComponents() {
@@ -49,19 +52,6 @@ class ComponentManager {
         }
       });
     } else throw new ClientError("components folder not found !", ErrorCode.LOAD_COMMAND_FAILED);
-  }
-
-  async executeComponentInteraction(interaction: ButtonInteraction) {
-    try {
-      const data = this.buttonCollection.get(interaction.customId);
-
-      if (data) {
-        data.deferedInteraction ? await interaction.deferReply({ ephemeral: data.deferedInteraction ?? false }) : "";
-        await data.execute(this.client, interaction);
-      } else throw new ClientError("Button data not found !", ErrorCode.EXECUTE_COMPONENT_INTERACTION_FAILED);
-    } catch (error) {
-      await this.client.errorHandler.handleButtonError({ error: error, logger: this.logger, interaction: interaction });
-    }
   }
 }
 

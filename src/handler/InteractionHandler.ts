@@ -1,19 +1,21 @@
-import { ButtonInteraction, ChatInputCommandInteraction, Interaction } from "discord.js";
+import { ButtonInteraction, ChatInputCommandInteraction, Interaction, ModalSubmitInteraction } from "discord.js";
 import SuwaClient from "../bot";
 
 class InteractionHandler {
-    private readonly client: SuwaClient
-    constructor(client: SuwaClient) {
-        this.client = client;
-    }
+  private readonly client: SuwaClient;
+  constructor(client: SuwaClient) {
+    this.client = client;
+  }
 
-    async onInteractionCreate(interaction: Interaction) {
-        if (interaction instanceof ChatInputCommandInteraction) {
-            await this.client;
-        }
+  async executeInteraction(interaction: Interaction) {
+    if (interaction.isCommand()) {
+    } else if (interaction.isChatInputCommand()) {
+      await this.client.commandHandler.executeCommandInteraction(interaction);
+    } else if (interaction.isModalSubmit()) {
+    } else if (interaction.isButton()) {
+      await this.client
     }
-
-    async onButtonInteractionCreate(interaction: ButtonInteraction) {
-        interaction.customId
-    }
+  }
 }
+
+export default InteractionHandler;

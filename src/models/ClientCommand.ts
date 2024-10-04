@@ -9,7 +9,7 @@ import {
 
 import SuwaClient from "../bot";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
-import path = require("path");
+import * as path from "path";
 import { ExecuteCommandInteractionFunction } from "../interfaces/ExecuteFunction";
 
 class ClientSlashCommandBuilder extends SlashCommandBuilder {

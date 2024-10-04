@@ -20,6 +20,13 @@ enum ErrorCode {
   UNKNOWN_ERROR = "GE_300",
 
   /**
+   * Interaction has been replied.
+   * @description The interaction has already been responded to.
+   * @fix Review the interaction process.
+   */
+  INTERACTION_REPLIED = "GE_301",
+
+  /**
    * No target channel.
    * @description the channel is undefined or null.
    * @fix Check the channel you provided for.
@@ -27,13 +34,6 @@ enum ErrorCode {
   NO_TARGET_CHANNEL = "GE_200",
 
   // Command Error
-  /**
-   * Interaction has been replied.
-   * @description The interaction has already been responded to.
-   * @fix Review the interaction process.
-   */
-  INTERACTION_REPLIED = "SYSC_200",
-
   /**
    * Invalid message error.
    * @description The message does not meet the requirements.

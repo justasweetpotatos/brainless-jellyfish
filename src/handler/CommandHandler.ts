@@ -1,4 +1,4 @@
-import path = require("path");
+import * as path from "path";
 import * as fs from "fs";
 import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";

@@ -1,8 +1,8 @@
 import { Collection, CommandInteraction, Routes } from "discord.js";
 
-import SuwaClient from "../../bot";
-import CommandLoader from "./CommandLoader";
-import { Logger } from "../../utils/Logger";
+import SuwaClient from "../bot";
+import CommandLoader from "./command/CommandLoader";
+import { Logger } from "../utils/Logger";
 
 interface GuildConfig {
   id: string;

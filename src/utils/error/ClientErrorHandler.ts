@@ -1,9 +1,11 @@
-import { ButtonInteraction, ChatInputCommandInteraction, Colors, EmbedBuilder } from "discord.js";
+import { ButtonInteraction, ChatInputCommandInteraction, Colors, EmbedBuilder, Interaction } from "discord.js";
 import SuwaClient from "../../bot";
 import { ClientError, ErrorCode } from "./ClientError";
-import { Logger } from "../Logger";
 import { ClientSlashCommandBuilder } from "../../models/ClientCommand";
-import { ButtonErrorData, CommandErrorData } from "../../interfaces/ErrorData";
+import { ButtonErrorData, CommandErrorData, EventErrorData } from "../../interfaces/ErrorData";
+
+const dangerIconUrl =
+  "https://cdn.discordapp.com/attachments/1269194340543107193/1269194910154883144/pngwing.com.png?ex=66af2d5f&is=66addbdf&hm=b77198e21a06b3b586d0b91de107da723eef48829ebf739947914ce594a5ed97&";
 
 class ClientErrorHandler {
   private readonly client: SuwaClient;
@@ -13,27 +15,32 @@ class ClientErrorHandler {
     this.createdTimestamp = new Date();
   }
 
+  identifyError(error: ClientError | unknown): ClientError {
+    return error instanceof ClientError
+      ? error
+      : error instanceof Error
+      ? new ClientError(error.message, ErrorCode.UNKNOWN_ERROR, error)
+      : new ClientError("An unknown error occurred", ErrorCode.UNKNOWN_ERROR);
+  }
+
   async handleSlashCommandError(data: CommandErrorData) {
-    const clientError =
-      data.error instanceof ClientError
-        ? data.error
-        : data.error instanceof Error
-        ? new ClientError(data.error.message, ErrorCode.EXECUTE_COMMAND_FAILED, data.error)
-        : new ClientError("An unknown error occurred", ErrorCode.UNKNOWN_ERROR);
+    const clientError = this.identifyError(data.error);
 
     if (data.interaction) await this.sendCommandErrorMessage(clientError, data.interaction);
     data.logger.error(clientError.createMessage());
   }
 
   async handleButtonError(data: ButtonErrorData) {
-    const clientError =
-      data.error instanceof ClientError
-        ? data.error
-        : data.error instanceof Error
-        ? new ClientError(data.error.message, ErrorCode.EXECUTE_COMMAND_FAILED, data.error)
-        : new ClientError("An unknown error occurred", ErrorCode.UNKNOWN_ERROR);
+    const clientError = this.identifyError(data.error);
 
     if (data.interaction) await this.sendButtonErrorMessage(clientError, data.interaction);
+    data.logger.error(clientError.createMessage());
+  }
+
+  async handleEventError(data: EventErrorData) {
+    const clientError = this.identifyError(data.error);
+
+    if (data.interaction) await this.sendEventErrorMessage(clientError, data.interaction);
     data.logger.error(clientError.createMessage());
   }
 
@@ -62,13 +69,12 @@ class ClientErrorHandler {
 
     embed.setAuthor({
       name: "Command Error",
-      iconURL:
-        "https://cdn.discordapp.com/attachments/1269194340543107193/1269194910154883144/pngwing.com.png?ex=66af2d5f&is=66addbdf&hm=b77198e21a06b3b586d0b91de107da723eef48829ebf739947914ce594a5ed97&",
+      iconURL: dangerIconUrl,
     });
 
     // Send to where interaction created.
     if (interaction) {
-      interaction.deferred ? "" : await interaction.deferReply({ ephemeral: true });
+      interaction.deferred ?? (await interaction.deferReply({ ephemeral: true }));
       await interaction.editReply({ embeds: [embed] });
     }
   }
@@ -100,8 +106,7 @@ class ClientErrorHandler {
 
     embed.setAuthor({
       name: "Command Error",
-      iconURL:
-        "https://cdn.discordapp.com/attachments/1269194340543107193/1269194910154883144/pngwing.com.png?ex=66af2d5f&is=66addbdf&hm=b77198e21a06b3b586d0b91de107da723eef48829ebf739947914ce594a5ed97&",
+      iconURL: dangerIconUrl,
     });
 
     // Send to where interaction created.
@@ -110,6 +115,8 @@ class ClientErrorHandler {
       await interaction.editReply({ embeds: [embed] });
     }
   }
+
+  async sendEventErrorMessage(error: ClientError, interaction?: Interaction) {}
 }
 
 export { ClientErrorHandler };

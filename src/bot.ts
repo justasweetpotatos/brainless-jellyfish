@@ -2,11 +2,14 @@ import { Client, CommandInteraction, GatewayIntentBits, version } from "discord.
 
 import { Logger, LogToFileSystem } from "./utils/Logger";
 import ConnectionManager from "./manager/connectorManager";
-import CommandManager from "./manager/command/commandManager";
+import CommandManager from "./manager/commandManager";
 import ClientGuildManager from "./manager/guild/GuildManager";
 import { ClientErrorHandler } from "./utils/error/ClientErrorHandler";
 import CommandHandler from "./handler/CommandHandler";
 import ComponentManager from "./manager/ComponentManager";
+import InteractionHandler from "./handler/InteractionHandler";
+import ComponentHandler from "./handler/ComponentHandler";
+import EventHandler from "./handler/EventHandler";
 
 class SuwaClient extends Client {
   public clientName: string = "Suwa_Client";
@@ -15,8 +18,13 @@ class SuwaClient extends Client {
   // public comManager: CommandManager;
   // public clientGuildManager: ClientGuildManager;
   public errorHandler: ClientErrorHandler;
-  public commandHandler: CommandHandler;
+  public eventHandler: EventHandler;
+  public componentHandler: ComponentHandler;
   public componentManager: ComponentManager;
+  public interactionHandler: InteractionHandler;
+  public commandHandler: CommandHandler;
+
+  public readonly clientMode: string = "debug";
 
   public logger: Logger;
   public logSystem: LogToFileSystem;
@@ -33,14 +41,14 @@ class SuwaClient extends Client {
 
     this.clientId = clientId;
 
-    this.logSystem = new LogToFileSystem();
+    this.logSystem = new LogToFileSystem(this);
     this.logger = new Logger("Client", this.logSystem);
     this.errorHandler = new ClientErrorHandler(this);
-
+    this.eventHandler = new EventHandler(this);
+    this.interactionHandler = new InteractionHandler(this);
     this.commandHandler = new CommandHandler(this);
     this.componentManager = new ComponentManager(this);
-
-
+    this.componentHandler = new ComponentHandler(this);
   }
 
   displayInfo(): void {
@@ -55,10 +63,10 @@ class SuwaClient extends Client {
   async start(token: string) {
     this.logger.info("Startup...");
 
-    
-
     // await this.connectDb();
     // await this.comManager.initialize();
+    this.componentManager.loadComponents();
+    this.eventHandler.loadEvents();
     this.commandHandler.loadCommands();
 
     await this.login(token);

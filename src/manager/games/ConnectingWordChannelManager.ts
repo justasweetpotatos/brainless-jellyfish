@@ -91,12 +91,18 @@ class ConnectingWordChannelManager {
     else throw new ClientError("No target channel.", ErrorCode.NO_TARGET_CHANNEL);
     if (client instanceof SuwaClient) {
       const setChannelButton = client.componentManager.getButtonData("connecting-word-set-channel-button");
+      const setLimitButton = client.componentManager.getButtonData("");
+      const setRepeatedButton = client.componentManager.getButtonData("");
+      const resetButtonButton = client.componentManager.getButtonData("");
       const closebutton = client.componentManager.getButtonData("close-message-button");
 
       const embed = createSetChannelEmbed(interaction.channelId);
-      const actionRow1 = craftActionRowButtonComponents([setChannelButton.data, closebutton.data]);
-
-      const actionRow2 = new ActionRowBuilder();
+      const actionRow1 = craftActionRowButtonComponents([
+        closebutton.data,
+        setLimitButton.data,
+        setRepeatedButton.data,
+        resetButtonButton.data
+      ]);
 
       await interaction.editReply({ embeds: [embed], components: [actionRow1] });
     }
@@ -114,9 +120,10 @@ class ConnectingWordChannelManager {
             Repeated: ${this.config.allowRepeat ? "✅" : "❌"}
 
             ***Hướng dẫn:***
-            **\`Remove      \`: Xóa config nối chữ của kênh.**
-            **\`Set Max     \`: Set giới hạn từ trước khi reset game.**
+            **\`Remove      \`: Xóa thiết lập cho kênh chỉ định.**
+            **\`Set Limit   \`: Đặt giới hạn reset (Khi đạt một số lượng từ nhất định sẽ tự động reset).**
             **\`Set Repeated\`: Cho phép lặp hoặc không.** 
+            **\`Reset       \`: Reset.**
         `,
       color: Colors.Blurple,
       timestamp: Date.now(),

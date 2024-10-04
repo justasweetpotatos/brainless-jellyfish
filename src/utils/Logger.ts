@@ -1,6 +1,7 @@
 import * as path from "path";
 import * as fs from "fs";
 import LogMessageType from "./enums/LogMessageType";
+import SuwaClient from "../bot";
 
 function getStringTimestamp(date?: Date): string {
   return (date ?? new Date()).toISOString().replace(/T/, " ").replace(/\..+/, "");
@@ -11,7 +12,10 @@ class LogToFileSystem {
   private logDir: string;
   private logFile: string;
 
-  constructor() {
+  private client: SuwaClient;
+
+  constructor(client: SuwaClient) {
+    this.client = client;
     this.systemCreateTimestamp = new Date();
 
     this.logDir = path.join(__dirname, "log");
@@ -21,7 +25,7 @@ class LogToFileSystem {
     );
 
     if (!fs.existsSync(this.logDir)) fs.mkdirSync(this.logDir);
-    if (!fs.existsSync(this.logFile))
+    if (!fs.existsSync(this.logFile) && !(this.client.clientMode === "debug"))
       fs.writeFileSync(
         this.logFile,
         `This is log create by client, created time is ${getStringTimestamp(this.systemCreateTimestamp)}.\n`
@@ -32,7 +36,7 @@ class LogToFileSystem {
    * Write message to log file
    */
   write(content: string) {
-    fs.appendFileSync(this.logFile, content + "\n");
+    if (!(this.client.clientMode === "debug")) fs.appendFileSync(this.logFile, content + "\n");
   }
 }
 

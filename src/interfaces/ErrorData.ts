@@ -1,4 +1,4 @@
-import { ButtonInteraction, ChatInputCommandInteraction } from "discord.js";
+import { ButtonInteraction, ChatInputCommandInteraction, Interaction } from "discord.js";
 import { ClientError } from "../utils/error/ClientError";
 import { Logger } from "../utils/Logger";
 
@@ -12,4 +12,10 @@ export interface ButtonErrorData {
   error: ClientError | unknown;
   logger: Logger;
   interaction?: ButtonInteraction;
+}
+
+export interface EventErrorData {
+  error: ClientError | unknown;
+  logger: Logger;
+  interaction?: Interaction;
 }

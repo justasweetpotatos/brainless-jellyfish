@@ -8,3 +8,7 @@ export interface ExecuteCommandInteractionFunction {
 export interface ExecuteButtonInteractionFunction {
   (client: SuwaClient, interaction: ButtonInteraction): Promise<void>;
 }
+
+export interface ExecuteEventFunction {
+  (client: SuwaClient, ...args: any[]): Promise<void>;
+}

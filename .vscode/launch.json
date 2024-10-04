@@ -12,6 +12,12 @@
       "name": "Run bot",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "command": "npm run pretest",
+      "name": "test component",
+      "request": "launch",
+      "type": "node-terminal"
     }
   ],
   "scripts": {

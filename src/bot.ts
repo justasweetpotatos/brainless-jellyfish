@@ -4,13 +4,19 @@ import { Logger, LogToFileSystem } from "./utils/Logger";
 import ConnectionManager from "./manager/connectorManager";
 import CommandManager from "./manager/command/commandManager";
 import ClientGuildManager from "./manager/guild/GuildManager";
+import { ClientErrorHandler } from "./utils/error/ClientErrorHandler";
+import CommandHandler from "./handler/CommandHandler";
+import ComponentManager from "./manager/ComponentManager";
 
 class SuwaClient extends Client {
   public clientName: string = "Suwa_Client";
   public clientId: string;
-  public connManager: ConnectionManager;
-  public comManager: CommandManager;
-  public clientGuildManager: ClientGuildManager;
+  // public connManager: ConnectionManager;
+  // public comManager: CommandManager;
+  // public clientGuildManager: ClientGuildManager;
+  public errorHandler: ClientErrorHandler;
+  public commandHandler: CommandHandler;
+  public componentManager: ComponentManager;
 
   public logger: Logger;
   public logSystem: LogToFileSystem;
@@ -29,10 +35,12 @@ class SuwaClient extends Client {
 
     this.logSystem = new LogToFileSystem();
     this.logger = new Logger("Client", this.logSystem);
+    this.errorHandler = new ClientErrorHandler(this);
 
-    this.connManager = new ConnectionManager(this);
-    this.comManager = new CommandManager(this);
-    this.clientGuildManager = new ClientGuildManager(this);
+    this.commandHandler = new CommandHandler(this);
+    this.componentManager = new ComponentManager(this);
+
+
   }
 
   displayInfo(): void {
@@ -44,29 +52,23 @@ class SuwaClient extends Client {
       > Number of server joined: `);
   }
 
-  async start(token?: string) {
-    if (!token) {
-      this.logger.warn("Token is empty! Pls give your bot token!");
-      return;
-    }
+  async start(token: string) {
     this.logger.info("Startup...");
 
-    await this.login(token);
+    
 
     // await this.connectDb();
-    await this.comManager.initialize();
+    // await this.comManager.initialize();
+    this.commandHandler.loadCommands();
 
-    this.on("interactionCreate", (interaction) => {
-      if (interaction instanceof CommandInteraction) this.comManager.executeCommand(interaction);
-    });
-
+    await this.login(token);
     this.logger.success("Client is ready!");
   }
 
   async connectDb() {
     try {
       this.logger.log("Initialization root connect to database...");
-      this.connManager.createRootConnection();
+      // this.connManager.createRootConnection();
       this.logger.log("Database connection good! Continue.");
     } catch (error) {
       error instanceof Error

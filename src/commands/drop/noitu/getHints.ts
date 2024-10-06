@@ -2,7 +2,7 @@ import { Client, CommandInteraction, SlashCommandSubcommandBuilder } from "disco
 import SuwaClient from "../../../bot";
 
 module.exports = {
-  data: new SlashCommandSubcommandBuilder().setName("create").setDescription("Select or create channel !"),
+  data: new SlashCommandSubcommandBuilder().setName("get-hint").setDescription("None"),
 
   async execute(interaction: CommandInteraction, client: SuwaClient | Client) {},
 };

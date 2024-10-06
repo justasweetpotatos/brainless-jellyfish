@@ -7,7 +7,7 @@ import {
   ChannelType,
   VoiceChannel,
 } from "discord.js";
-import SuwaClient from "../../bot";
+import SuwaClient from "../../../bot";
 
 module.exports = {
   data: new SlashCommandSubcommandBuilder()

@@ -110,10 +110,7 @@ class ClientErrorHandler {
     });
 
     // Send to where interaction created.
-    if (interaction) {
-      interaction.deferred ? "" : await interaction.deferReply({ ephemeral: true });
-      await interaction.editReply({ embeds: [embed] });
-    }
+    if (interaction && (await interaction.fetchReply())) await interaction.editReply({ embeds: [embed] });
   }
 
   async sendEventErrorMessage(error: ClientError, interaction?: Interaction) {}

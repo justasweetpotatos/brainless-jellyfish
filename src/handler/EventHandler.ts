@@ -29,8 +29,8 @@ class EventHandler {
           if (!data.name || !data.execute) throw new ClientError("Event data is invalid.", ErrorCode.LOAD_EVENT_FAILED);
           else {
             if (data.once) this.client.once(data.name, data.execute);
-            else this.client.on(data.name, data.execute);
-            this.eventCollection.set(data.name, data);
+            else this.client.on(data.name, (...args) => data.execute(this.client, ...args));
+            this.eventCollection.set(data.name, (...args) => data.execute(this.client, ...args));
           }
           this.logger.success(`Loaded event "${data.name}".`);
         });

@@ -47,14 +47,17 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
       fs.readdirSync(folder).forEach((item) => {
         if (!item.endsWith(".ts") && !item.endsWith(".js")) return;
         else {
-          const builder = require(path.join(folder, item));
-          if (builder instanceof ClientSlashCommandSubcommandBuilder) {
-            this.addSubcommand(builder);
-            this.subcommandBuilderCollection.set(builder.name, builder);
-          } else if (builder instanceof ClientSlashCommandSubcommandGroupBuilder) {
-            builder.loadSubcommandBuilderFolder();
-            this.addSubcommandGroup(builder);
-            this.subcommandBuilderCollection.set(builder.name, builder);
+          const subcommandBuilderPath = path.join(folder, item);
+          const subcommandBuilder = require(subcommandBuilderPath);
+
+          const b = 12312;
+          if (subcommandBuilder instanceof ClientSlashCommandSubcommandBuilder) {
+            this.addSubcommand(subcommandBuilder);
+            this.subcommandBuilderCollection.set(subcommandBuilder.name, subcommandBuilder);
+          } else if (subcommandBuilder instanceof ClientSlashCommandSubcommandGroupBuilder) {
+            subcommandBuilder.loadSubcommandBuilderFolder();
+            this.addSubcommandGroup(subcommandBuilder);
+            this.subcommandBuilderCollection.set(subcommandBuilder.name, subcommandBuilder);
           } else throw new ClientError("Invalid builder type!", ErrorCode.BUILDER_UNDEFINED_OR_INVALID);
         }
       });
@@ -66,9 +69,9 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
     parseStack: boolean = false
   ): string | Array<string> {
     const stack = [
-      interaction.command?.name || "",
-      interaction.options.getSubcommandGroup() || "",
-      interaction.options.getSubcommand() || "",
+      interaction.commandName,
+      interaction.options.getSubcommandGroup() || interaction.options.getSubcommand() || "",
+      interaction.options.getSubcommandGroup() ? interaction.options.getSubcommand() : "",
     ];
 
     const filteredStack = stack.filter((item) => item !== "");

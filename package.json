@@ -19,7 +19,7 @@
     "pretest": "ts-node src/test.ts"
   },
   "name": "webpack",
-  "version": "1.0.0",
+  "version": "BETA-5.0.1",
   "description": "no description",
   "main": "webpack.config.js",
   "author": "QuangHuy",

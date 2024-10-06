@@ -131,22 +131,22 @@ enum ErrorCode {
  * Corresponding error messages for each error code.
  */
 const ErrorMessage: { [key in ErrorCode]: string } = {
-  [ErrorCode.UNKNOWN_ERROR]: "An error occurred. Please check the logs.",
-  [ErrorCode.NO_TARGET_CHANNEL]: "The channel is undefined or invalid.",
-  [ErrorCode.INTERACTION_REPLIED]: "The interaction response has been sent.",
-  [ErrorCode.MESSAGE_INVALID]: "The message is invalid.",
-  [ErrorCode.USER_INVALID]: "The user is invalid.",
-  [ErrorCode.BUILDER_UNDEFINED_OR_INVALID]: "The builder is not defined or is invalid.",
-  [ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID]: "The executor is not defined or is invalid.",
-  [ErrorCode.COMMAND_OPTION_UNDEFINED_OR_INVALID]: "The command option is not defined or is invalid.",
-  [ErrorCode.LOAD_COMMAND_FAILED]: "Failed to load the command.",
-  [ErrorCode.REGISTER_COMMAND_FAILED]: "Failed to register the command.",
-  [ErrorCode.EXECUTE_COMMAND_FAILED]: "Failed to execute the command.",
-  [ErrorCode.LOAD_EVENT_FAILED]: "Failed to load the event.",
-  [ErrorCode.REGISTER_EVENT_FAILED]: "Failed to register the event.",
-  [ErrorCode.EXECUTE_EVENT_FAILED]: "Failed to execute the event.",
-  [ErrorCode.LOAD_COMPONENT_FAILED]: "Failed to load the component.",
-  [ErrorCode.EXECUTE_COMPONENT_INTERACTION_FAILED]: "Failed to execute the component.",
+  [ErrorCode.UNKNOWN_ERROR]: "An error occurred. Please check the logs",
+  [ErrorCode.NO_TARGET_CHANNEL]: "The channel is undefined or invalid",
+  [ErrorCode.INTERACTION_REPLIED]: "The interaction response has been sent",
+  [ErrorCode.MESSAGE_INVALID]: "The message is invalid",
+  [ErrorCode.USER_INVALID]: "The user is invalid",
+  [ErrorCode.BUILDER_UNDEFINED_OR_INVALID]: "The builder is not defined or is invalid",
+  [ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID]: "The executor is not defined or is invalid",
+  [ErrorCode.COMMAND_OPTION_UNDEFINED_OR_INVALID]: "The command option is not defined or is invalid",
+  [ErrorCode.LOAD_COMMAND_FAILED]: "Failed to load the command",
+  [ErrorCode.REGISTER_COMMAND_FAILED]: "Failed to register the command",
+  [ErrorCode.EXECUTE_COMMAND_FAILED]: "Failed to execute the command",
+  [ErrorCode.LOAD_EVENT_FAILED]: "Failed to load the event",
+  [ErrorCode.REGISTER_EVENT_FAILED]: "Failed to register the event",
+  [ErrorCode.EXECUTE_EVENT_FAILED]: "Failed to execute the event",
+  [ErrorCode.LOAD_COMPONENT_FAILED]: "Failed to load the component",
+  [ErrorCode.EXECUTE_COMPONENT_INTERACTION_FAILED]: "Failed to execute the component",
 };
 
 class ClientError extends Error {
@@ -164,9 +164,11 @@ class ClientError extends Error {
     Object.setPrototypeOf(this, ClientError.prototype);
   }
 
-  createMessage(getStack: boolean = false): string {
-    const stackInfo = getStack && this.cause ? this.cause.stack : this.stack;
-    return `${this.code}: ${this.baseMessage}. ${this.message} ${stackInfo ? `\n${stackInfo}` : ""}`;
+  createMessage(getStack: boolean = true): string {
+    const stackInfo = `${this.stack}${this.cause ? `\n${this.cause.stack}` : ""}`;
+    return `${this.code}: ${this.baseMessage} ${this.message ? `- ${this.message}` : ""}: ${
+      getStack ? `\n${stackInfo}` : ""
+    }`;
   }
 }
 

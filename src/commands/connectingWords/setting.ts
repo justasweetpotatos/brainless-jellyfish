@@ -1,11 +1,12 @@
 import { ChannelType, ChatInputCommandInteraction, SlashCommandChannelOption, TextChannel } from "discord.js";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
 import SuwaClient from "../../bot";
+import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
-  .setName("set")
-  // .setNameLocalization("vi", "đặt")
-  .setDescription("Set channle to play.")
+  .setName("setting")
+  .setNameLocalization("vi", "cài-đặt")
+  .setDescription("Connecting word channle setting")
+  .setDescriptionLocalization("vi", "Cài đặt kênh game nối chữ")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {
     interaction.deferred ? "" : await interaction.deferReply({ fetchReply: true });
     const channel: TextChannel = interaction.options.getChannel("channel", true);
@@ -15,8 +16,9 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .addChannelOption(
     new SlashCommandChannelOption()
       .setName("channel")
-      .setDescription("any")
-      .addChannelTypes(ChannelType.GuildText)
-      // .setDescriptionLocalization("vi", "kênh")
+      .setDescription("The text channel")
+      .setNameLocalization("vi", "kênh")
+      .setDescriptionLocalization("vi", "Kênh chat")
       .setRequired(true)
+      .addChannelTypes(ChannelType.GuildText)
   );

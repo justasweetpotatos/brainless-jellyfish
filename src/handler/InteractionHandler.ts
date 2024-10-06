@@ -8,12 +8,11 @@ class InteractionHandler {
   }
 
   async executeInteraction(interaction: Interaction) {
-    if (interaction.isCommand()) {
-    } else if (interaction.isChatInputCommand()) {
+    if (interaction.isChatInputCommand()) {
       await this.client.commandHandler.executeCommandInteraction(interaction);
     } else if (interaction.isModalSubmit()) {
     } else if (interaction.isButton()) {
-      await this.client
+      await this.client;
     }
   }
 }

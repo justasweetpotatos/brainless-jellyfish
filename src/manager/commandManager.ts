@@ -1,4 +1,10 @@
-import { Collection, CommandInteraction, Routes } from "discord.js";
+import {
+  Collection,
+  CommandInteraction,
+  REST,
+  RESTPostAPIChatInputApplicationCommandsJSONBody,
+  Routes,
+} from "discord.js";
 
 import SuwaClient from "../bot";
 import CommandLoader from "./command/CommandLoader";
@@ -11,60 +17,26 @@ interface GuildConfig {
 }
 
 class CommandManager {
-  private client: SuwaClient;
-  private logger: Logger;
-
-  private commandLoader: CommandLoader;
-
-  private guilds: Collection<string, GuildConfig> = new Collection();
+  private readonly client: SuwaClient;
+  private readonly logger: Logger;
 
   constructor(client: SuwaClient) {
     this.client = client;
-    this.logger = new Logger("CommandManager", client.logSystem);
-
-    this.commandLoader = new CommandLoader(this.client);
+    this.logger = new Logger("command-manager", client.logSystem);
   }
 
-  async initialize() {
-    this.logger.log("Start refreshing application (/) commands...");
+  async registerCommandForDefaultGuild() {
+    const defaultGuild = this.client.guilds.cache.get("1165708698723823697");
+    if (defaultGuild) {
+      const route = Routes.applicationGuildCommands(this.client.clientId, defaultGuild.id);
+      const jsonBody: Array<RESTPostAPIChatInputApplicationCommandsJSONBody> = [];
+      this.client.commandHandler.commandCollection.forEach((slashCommadnBuilder) => {
+        jsonBody.push(slashCommadnBuilder.toJSON());
+      });
+      await this.client.rest.put(route, { body: jsonBody });
 
-    await this.commandLoader.loadAllCommands();
-    await this.refreshGuildCommands();
-
-    this.logger.success("Successfully refreshing appplication (/) commands !");
-  }
-
-  async reloadCommand(commandName: string) {
-    try {
-      this.logger.log(`Start reloading command named "${commandName}"...`);
-      await this.commandLoader.reloadCommand(commandName);
-      this.logger.success(`Finished reloading command name "${commandName}"!`);
-    } catch (error) {
-      this.logger.error(`${error instanceof Error ? `${error.message}\n${error.stack}` : ""}`);
+      this.logger.success(`Registered command for guild default named: ${defaultGuild.name}-${defaultGuild.id}`);
     }
-  }
-
-  async executeCommand(interaction: CommandInteraction) {
-    const executorData = this.commandLoader.executors.get(interaction.commandName);
-
-    if (!executorData) throw new Error("No executor for this function!");
-    else await executorData?.execute(interaction, this.client);
-  }
-
-  async refreshGuildCommands() {
-    const response = this.client.guilds.cache;
-
-    response.forEach((guildData) => {
-      this.guilds.set(guildData.id, {
-        id: guildData.id,
-        name: guildData.name,
-        config: {},
-      });
-
-      this.client.rest.put(Routes.applicationGuildCommands(this.client.clientId, guildData.id), {
-        body: this.commandLoader.commandsToJson(),
-      });
-    });
   }
 }
 

@@ -1,6 +1,6 @@
 import { SlashCommandRoleOption, SlashCommandStringOption } from "discord.js";
 
-export const containSubstringToDeleteMessageOption = new SlashCommandStringOption()
+export const substringToDeleteMessageOption = new SlashCommandStringOption()
   .setName("contain")
   .setDescription("Enter a substring.")
   .setNameLocalization("vi", "bao-gồm-nội-dung")
@@ -17,19 +17,14 @@ export const reactRoleDescriptionOption = new SlashCommandStringOption()
   .setDescription("any")
   .setRequired(true);
 
-export const autoRoleCreateButtonLabelOption = new SlashCommandStringOption()
+export const autoRoleSetButtonLabelOption = new SlashCommandStringOption()
   .setName("label")
   .setDescription("Enter the button label")
   .setRequired(true);
 
-export const autoRoleCreateButtonEmojiOption = new SlashCommandStringOption() 
+export const autoRoleSetButtonEmojiOption = new SlashCommandStringOption()
   .setName("emoji")
   .setDescription("Enter the button emoji");
-
-// Need fixed
-export const autoRoleCreateButtonStyleOption = new SlashCommandStringOption()
-  .setName("style")
-  .setDescription("Enter the button style");
 
 export const autoRoleSetButtonMessageIdOption = new SlashCommandStringOption()
   .setName("message-id")
@@ -41,3 +36,12 @@ export const autoRoleSetButtonNameOption = new SlashCommandStringOption()
   .setDescription("Enter the name of created buttons")
   .setAutocomplete(true)
   .setRequired(true);
+
+export const autoRoleSetMessageTitleOption = new SlashCommandStringOption()
+  .setName("title")
+  .setDescription("Enter the title of message")
+  .setRequired(true);
+
+export const autoRoleSetMessageDesctiptionOption = new SlashCommandStringOption()
+  .setName("description")
+  .setDescription("Enter the description of message");

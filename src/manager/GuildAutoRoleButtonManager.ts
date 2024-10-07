@@ -25,7 +25,7 @@ class GuildAutoRoleManager {
     this.autoRoleButtonCollection = new Collection<string, ButtonData>();
   }
 
-  async setToMessage(message: Message, buttonId: string, role: Role) {
+  async setToMessage(message: Message, buttonId: string) {
     const buttonData = this.autoRoleButtonCollection.get(buttonId);
     if (buttonData) {
       const actionRow = craftActionRowButtonComponents([buttonData.data]);

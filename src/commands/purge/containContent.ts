@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../../bot";
 import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
-import { containSubstringToDeleteMessageOption } from "../commandOptions/stringOptions";
+import { substringToDeleteMessageOption } from "../commandOptions/stringOptions";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { deleteMessages } from "../../utils/functions";
 import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
@@ -25,4 +25,4 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
     );
   })
   .addNumberOption(numberToDeleteMessageOption)
-  .addStringOption(containSubstringToDeleteMessageOption);
+  .addStringOption(substringToDeleteMessageOption);

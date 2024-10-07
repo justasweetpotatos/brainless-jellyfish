@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
-import { ChatInputCommandInteraction, Collection } from "discord.js";
+import { AutocompleteInteraction, ChatInputCommandInteraction, Collection } from "discord.js";
 import { ClientSlashCommandBuilder } from "../models/ClientCommand";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
 
@@ -38,9 +38,32 @@ class CommandHandler {
     }
   }
 
+  async executeAutocompleteCommandInteraction(interaction: AutocompleteInteraction) {
+    try {
+      const command = this.commandCollection.get(interaction.commandName);
+      if (!command) throw new ClientError("Builder is not found!", ErrorCode.BUILDER_UNDEFINED_OR_INVALID);
+
+      const execute = command.getAutocompleteExecutor(
+        ClientSlashCommandBuilder.getCommandStackName(interaction, false)
+      );
+      if (!execute) throw new ClientError("", ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID);
+      await execute(this.client, interaction);
+    } catch (error) {
+      await this.client.errorHandler.handleSlashCommandError({
+        error: error,
+        logger: this.logger,
+      });
+    }
+  }
+
   loadCommands() {
     if (!fs.existsSync(this.commandFolder))
       throw new ClientError("Commands folder is invalid !", ErrorCode.LOAD_COMMAND_FAILED);
+
+    if (this.commandCollection.size > 0) {
+      this.commandCollection.clear();
+      this.logger.log("Cleared all application (/) commands...");
+    }
 
     this.logger.log("Loading application (/) commands...");
 

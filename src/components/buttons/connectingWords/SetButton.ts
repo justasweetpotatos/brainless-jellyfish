@@ -1,5 +1,5 @@
 import { ButtonBuilder, ButtonInteraction } from "discord.js";
-import ButtonData from "../../../interfaces/ComponentData";
+import { ButtonData } from "../../../interfaces/ComponentData";
 import SuwaClient from "../../../bot";
 
 const connectingWrordSetButton: ButtonData = {

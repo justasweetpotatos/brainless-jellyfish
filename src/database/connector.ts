@@ -1,6 +1,6 @@
 import { Connection, ConnectionConfig, createConnection } from "mysql";
-import Logger from "../utils/Logger";
 import SuwaClient from "../bot";
+import { Logger } from "../utils/Logger";
 
 class Connector {
   private logger: Logger;
@@ -9,7 +9,7 @@ class Connector {
 
   constructor(client: SuwaClient) {
     this.client = client;
-    this.logger = new Logger("Database", this.client.loggerFilePath);
+    this.logger = new Logger("Database", this.client.logSystem);
   }
 
   public createConnection(config: ConnectionConfig): Connection {

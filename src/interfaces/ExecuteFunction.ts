@@ -1,8 +1,12 @@
-import { ButtonInteraction, ChatInputCommandInteraction } from "discord.js";
+import { AutocompleteInteraction, ButtonInteraction, ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../bot";
 
 export interface ExecuteCommandInteractionFunction {
   (client: SuwaClient, interaction: ChatInputCommandInteraction): Promise<void>;
+}
+
+export interface ExecuteAutocompleteCommandInteractionFunction {
+  (client: SuwaClient, interaction: AutocompleteInteraction): Promise<void>;
 }
 
 export interface ExecuteButtonInteractionFunction {

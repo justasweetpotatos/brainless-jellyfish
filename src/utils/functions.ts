@@ -1,12 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
 import { RestOrArray } from "discord.js";
-
-export function craftActionRowButtonComponents(
-  components: RestOrArray<ButtonBuilder>
-): ActionRowBuilder<ButtonBuilder> {
-  return new ActionRowBuilder<ButtonBuilder>().setComponents(...components);
-}
-
 import {
   ChatInputCommandInteraction,
   Collection,
@@ -21,6 +14,12 @@ import {
 } from "discord.js";
 import { searchMessageOptions } from "../interfaces/options";
 import { ClientError, ErrorCode } from "./error/ClientError";
+
+export function craftActionRowButtonComponents(
+  components: RestOrArray<ButtonBuilder>
+): ActionRowBuilder<ButtonBuilder> {
+  return new ActionRowBuilder<ButtonBuilder>().setComponents(...components);
+}
 
 export async function getNumberOfMessage(
   channel: TextBasedChannel,
@@ -139,10 +138,15 @@ export async function deleteMessages(options: searchMessageOptions, interaction:
     );
 
     // If there are messages to delete
-    if (bulkDeleteableMessageCollection.size > 0) {
+    if (bulkDeleteableMessageCollection.size + messageCollection.size > 0) {
       const messages: MessageResolvable[] = Array.from(bulkDeleteableMessageCollection.values());
       const deletedMessages = await targetChannel.bulkDelete(messages, true);
-      messageCollection.forEach(async (message) => (message.deletable ? await message.delete() : undefined));
+      messageCollection.forEach(async (message) => {
+        if (message.deletable) {
+          const deletedMessage = await message.delete();
+          deletedMessages.set(deletedMessage.id, deletedMessage);
+        }
+      });
 
       let table: Array<string> = [];
       userDataCollection.forEach((userData) => {

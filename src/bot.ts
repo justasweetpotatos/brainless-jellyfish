@@ -1,4 +1,4 @@
-import { Client, CommandInteraction, GatewayIntentBits, REST, version } from "discord.js";
+import { Client, CommandInteraction, GatewayIntentBits, IntentsBitField, REST, version } from "discord.js";
 
 import { Logger, LogToFileSystem } from "./utils/Logger";
 import ConnectionManager from "./manager/connectorManager";
@@ -10,6 +10,7 @@ import ComponentManager from "./manager/ComponentManager";
 import InteractionHandler from "./handler/InteractionHandler";
 import ComponentHandler from "./handler/ComponentHandler";
 import EventHandler from "./handler/EventHandler";
+import GetRoleButtonManager from "./manager/AutoRoleButtonManager";
 
 class SuwaClient extends Client {
   public clientName: string = "Suwa_Client";
@@ -24,6 +25,7 @@ class SuwaClient extends Client {
   public interactionHandler: InteractionHandler;
   public commandHandler: CommandHandler;
   public commandManager: CommandManager;
+  public autoRoleManager: GetRoleButtonManager;
 
   public readonly clientMode: string = "debug";
 
@@ -51,6 +53,7 @@ class SuwaClient extends Client {
     this.componentManager = new ComponentManager(this);
     this.componentHandler = new ComponentHandler(this);
     this.commandManager = new CommandManager(this);
+    this.autoRoleManager = new GetRoleButtonManager(this);
   }
 
   displayStatus(): void {
@@ -68,18 +71,20 @@ class SuwaClient extends Client {
 
     this.rest = new REST({ version: "10" }).setToken(token);
     this.logger.log(`Created rest, version 10.`);
+    await this.loadPreferences();
+    this.once("ready", async () => {
+      await this.commandManager.registerCommandForDefaultGuild();
+    });
+    await this.login(token);
+    this.logger.success("Client is ready!");
+  }
+
+  async loadPreferences() {
     // await this.connectDb();
     // await this.comManager.initialize();
     this.componentManager.loadComponents();
     this.eventHandler.loadEvents();
     this.commandHandler.loadCommands();
-
-    this.once("ready", async () => {
-      await this.commandManager.registerCommandForDefaultGuild();
-    });
-
-    await this.login(token);
-    this.logger.success("Client is ready!");
   }
 
   async connectDb() {

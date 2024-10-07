@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import {
+  AutocompleteInteraction,
   ChatInputCommandInteraction,
   Collection,
   SlashCommandBuilder,
@@ -10,7 +11,10 @@ import {
 import SuwaClient from "../bot";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
 import * as path from "path";
-import { ExecuteCommandInteractionFunction } from "../interfaces/ExecuteFunction";
+import {
+  ExecuteAutocompleteCommandInteractionFunction,
+  ExecuteCommandInteractionFunction,
+} from "../interfaces/ExecuteFunction";
 
 class ClientSlashCommandBuilder extends SlashCommandBuilder {
   public readonly localFilePath: string;
@@ -20,6 +24,13 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
   ) => {
     await interaction.deferReply({ ephemeral: true });
     await interaction.editReply({ content: "Not active yet !" });
+  };
+
+  public autocompleteExecute: ExecuteAutocompleteCommandInteractionFunction = async (
+    client: SuwaClient,
+    interaction: AutocompleteInteraction
+  ) => {
+    await interaction.respond([]);
   };
 
   public subcommandBuilderCollection: Collection<
@@ -39,6 +50,10 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
   setExecutor(execute: ExecuteCommandInteractionFunction): ClientSlashCommandBuilder {
     this.execute = execute;
     return this;
+  }
+
+  setAutocompleteExecutor(execute: ExecuteAutocompleteCommandInteractionFunction) {
+    this.autocompleteExecute = execute;
   }
 
   loadSubcommandBuilderFolder() {
@@ -65,19 +80,22 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
   }
 
   static getCommandStackName(
-    interaction: ChatInputCommandInteraction,
+    interaction: ChatInputCommandInteraction | AutocompleteInteraction,
     parseStack: boolean = false
   ): string | Array<string> {
-    const stack = [
-      interaction.commandName,
-      interaction.options.getSubcommandGroup() || interaction.options.getSubcommand() || "",
-      interaction.options.getSubcommandGroup() ? interaction.options.getSubcommand() : "",
-    ];
+    const commandParts: Array<string> = [interaction.commandName];
 
-    const filteredStack = stack.filter((item) => item !== "");
+    try {
+      commandParts.push(interaction.options.getSubcommandGroup() ?? "");
+    } catch (error) {}
 
-    if (parseStack) return filteredStack.join(" ").trimEnd();
-    else return filteredStack;
+    try {
+      commandParts.push(interaction.options.getSubcommand() ?? "");
+    } catch (error) {}
+
+    const filteredParts = commandParts.filter((item) => item !== "");
+
+    return parseStack ? filteredParts.join(" ").trimEnd() : filteredParts;
   }
 
   getExecutor(commandStackName: string | Array<string>): ExecuteCommandInteractionFunction | undefined {
@@ -100,6 +118,30 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
         return undefined;
     }
   }
+
+  getAutocompleteExecutor(
+    commandStackName: string | Array<string>
+  ): ExecuteAutocompleteCommandInteractionFunction | undefined {
+    let components: Array<string> = [];
+    if (typeof commandStackName == "string") components = commandStackName.split(" ");
+    else components = commandStackName;
+
+    const subBuilder = this.subcommandBuilderCollection.get(components.at(1) ?? "");
+    switch (components.length) {
+      case 1:
+        return this.autocompleteExecute;
+      case 2:
+        if (subBuilder && subBuilder instanceof ClientSlashCommandSubcommandBuilder)
+          return subBuilder.autocompleteExecute;
+        else return undefined;
+      case 3:
+        if (subBuilder && subBuilder instanceof ClientSlashCommandSubcommandGroupBuilder)
+          return subBuilder.subcommandBuilderCollection.get(components.at(2) ?? "")?.autocompleteExecute;
+        else return undefined;
+      default:
+        return undefined;
+    }
+  }
 }
 
 class ClientSlashCommandSubcommandBuilder extends SlashCommandSubcommandBuilder {
@@ -111,11 +153,22 @@ class ClientSlashCommandSubcommandBuilder extends SlashCommandSubcommandBuilder 
     await interaction.deferReply({ ephemeral: true });
     await interaction.editReply({ content: "Not active yet !" });
   };
+  public autocompleteExecute: ExecuteAutocompleteCommandInteractionFunction = async (
+    client: SuwaClient,
+    interaction: AutocompleteInteraction
+  ) => {
+    await interaction.respond([]);
+  };
 
   constructor(localFilePath: string) {
     super();
 
     this.localFilePath = localFilePath;
+  }
+
+  setAutocompleteExecutor(execute: ExecuteAutocompleteCommandInteractionFunction) {
+    this.autocompleteExecute = execute;
+    return this;
   }
 
   setExecutor(execute: ExecuteCommandInteractionFunction): ClientSlashCommandSubcommandBuilder {

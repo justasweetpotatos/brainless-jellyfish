@@ -2,7 +2,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { ButtonInteraction, Collection } from "discord.js";
 import SuwaClient from "../bot";
-import ButtonData from "../interfaces/ComponentData";
+import { ButtonData } from "../interfaces/ComponentData";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
 import { Logger } from "../utils/Logger";
 

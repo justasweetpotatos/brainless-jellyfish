@@ -1,12 +1,12 @@
 import { ButtonBuilder, ButtonInteraction, ButtonStyle } from "discord.js";
-import ButtonData from "../../../interfaces/ComponentData";
+import { ButtonData } from "../../../interfaces/ComponentData";
 import SuwaClient from "../../../bot";
 
 const closeMesageButton: ButtonData = {
   customId: "close-message-button",
-  data: new ButtonBuilder().setCustomId("close-message-button").setStyle(ButtonStyle.Danger),
+  data: new ButtonBuilder().setCustomId("close-message-button").setLabel("Close").setStyle(ButtonStyle.Danger),
   execute: async (client: SuwaClient, interaction: ButtonInteraction) => {
-    interaction.message.deletable ?? (await interaction.message.delete());
+    interaction.message.deletable ? await interaction.message.delete() : "";
   },
 };
 

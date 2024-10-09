@@ -110,6 +110,7 @@ class ClientErrorHandler {
     });
 
     // Send to where interaction created.
+    if (interaction.replied) return;
     if (interaction && (await interaction.fetchReply())) await interaction.editReply({ embeds: [embed] });
   }
 

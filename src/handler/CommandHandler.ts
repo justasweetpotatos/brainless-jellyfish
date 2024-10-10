@@ -3,7 +3,7 @@ import * as fs from "fs";
 import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
 import { AutocompleteInteraction, ChatInputCommandInteraction, Collection } from "discord.js";
-import { ClientSlashCommandBuilder } from "../models/ClientCommand";
+import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
 
 class CommandHandler {
@@ -26,7 +26,7 @@ class CommandHandler {
       const command = this.commandCollection.get(interaction.commandName);
       if (!command) throw new ClientError("Builder is not found!", ErrorCode.BUILDER_UNDEFINED_OR_INVALID);
 
-      const execute = command.getExecutor(ClientSlashCommandBuilder.getCommandStackName(interaction, false));
+      const execute = command.getExecutor(ClientSlashCommandBuilder.getStackName(interaction, false));
       if (!execute) throw new ClientError("", ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID);
       await execute(this.client, interaction);
     } catch (error) {
@@ -43,9 +43,7 @@ class CommandHandler {
       const command = this.commandCollection.get(interaction.commandName);
       if (!command) throw new ClientError("Builder is not found!", ErrorCode.BUILDER_UNDEFINED_OR_INVALID);
 
-      const execute = command.getAutocompleteExecutor(
-        ClientSlashCommandBuilder.getCommandStackName(interaction, false)
-      );
+      const execute = command.getAutocompleteExecutor(ClientSlashCommandBuilder.getStackName(interaction, false));
       if (!execute) throw new ClientError("", ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID);
       await execute(this.client, interaction);
     } catch (error) {
@@ -73,7 +71,7 @@ class CommandHandler {
         try {
           const builder = require(path.join(this.commandFolder, file));
           if (builder instanceof ClientSlashCommandBuilder) {
-            builder.loadSubcommandBuilderFolder();
+            builder.loadSubcommands();
             this.commandCollection.set(builder.name, builder);
             this.logger.success(`Loaded command: ${builder.name}`);
           } else

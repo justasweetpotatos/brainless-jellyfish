@@ -1,6 +1,7 @@
 import { ButtonInteraction } from "discord.js";
 import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
+import { AutoRoleButtonCustomId, ButtonCustomId } from "../utils/enums/button";
 
 class ComponentHandler {
   private readonly client: SuwaClient;
@@ -12,12 +13,17 @@ class ComponentHandler {
 
   async executeButtonInteraction(interaction: ButtonInteraction) {
     try {
-      if (interaction.customId.startsWith("auto-role-button") && interaction.guild) {
+      if (!interaction.guild) return;
+
+      if (interaction.customId.startsWith(AutoRoleButtonCustomId.AUTOROLE_BUTTON)) {
         const manager = this.client.autoRoleManager.callGuildManager(interaction.guild);
         await manager.executeButtonInteraction(interaction);
+      } else if (interaction.customId.startsWith(AutoRoleButtonCustomId.REMOVING_BUTTON)) {
+        const manager = this.client.autoRoleManager.callGuildManager(interaction.guild);
+        await manager.executeRemoveActionButtonInteraction(interaction);
       } else if (interaction.customId.startsWith("preview")) {
         await interaction.deferReply({ ephemeral: true });
-        await interaction.  editReply({ content: "Preview mode: true" });
+        await interaction.editReply({ content: "Preview mode: true" });
       } else {
         const buttonData = this.client.componentManager.getButtonData(interaction.customId);
         await buttonData.execute(this.client, interaction);

@@ -1,5 +1,11 @@
 import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
-import { RestOrArray } from "discord.js";
+import {
+  ButtonInteraction,
+  Interaction,
+  InteractionDeferReplyOptions,
+  ModalSubmitInteraction,
+  RestOrArray,
+} from "discord.js";
 import {
   ChatInputCommandInteraction,
   Collection,
@@ -171,4 +177,21 @@ export async function deleteMessages(options: searchMessageOptions, interaction:
   setTimeout(async () => {
     await interaction.deleteReply();
   }, 5000);
+}
+
+export async function autoDeferReply(
+  interaction: ChatInputCommandInteraction | ButtonInteraction | ModalSubmitInteraction,
+  options?: InteractionDeferReplyOptions
+) {
+  if (!interaction.deferred) return interaction.deferReply(options);
+  else return await interaction.fetchReply();
+}
+
+export function createEmbedWithTimestampAndCreateUser(
+  interaction: ChatInputCommandInteraction | ButtonInteraction | ModalSubmitInteraction
+) {
+  return new EmbedBuilder({
+    timestamp: Date.now(),
+    footer: { text: interaction.user.displayName, iconURL: interaction.user.avatarURL() ?? "" },
+  });
 }

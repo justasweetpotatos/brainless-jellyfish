@@ -1,62 +1,41 @@
 import * as fs from "fs";
-import {
-  AutocompleteInteraction,
-  ChatInputCommandInteraction,
-  Collection,
-  SlashCommandBuilder,
-  SlashCommandSubcommandBuilder,
-  SlashCommandSubcommandGroupBuilder,
-} from "discord.js";
-
-import SuwaClient from "../bot";
-import { ClientError, ErrorCode } from "../utils/error/ClientError";
 import * as path from "path";
+import { AutocompleteInteraction, ChatInputCommandInteraction, Collection, SlashCommandBuilder } from "discord.js";
+import ClientSlashCommandSubcommandBuilder from "./ClientSlashCommandSubcommandBuilder";
+import ClientSlashCommandSubcommandGroupBuilder from "./ClientSlashCommandSubcommandGroupBuilder";
+import { defaultAutocompleteExecuteFunction, defaultCommandExecuteFunction } from "../utils/defaultFunctions";
+import { ClientError, ErrorCode } from "../utils/error/ClientError";
 import {
   ExecuteAutocompleteCommandInteractionFunction,
   ExecuteCommandInteractionFunction,
-} from "../interfaces/ExecuteFunction";
+} from "./interface/executeFunctions";
+
+declare type SubcommandBuilderCollectionItem =
+  | ClientSlashCommandSubcommandBuilder
+  | ClientSlashCommandSubcommandGroupBuilder;
 
 class ClientSlashCommandBuilder extends SlashCommandBuilder {
   public readonly localFilePath: string;
-  public execute: ExecuteCommandInteractionFunction = async (
-    client: SuwaClient,
-    interaction: ChatInputCommandInteraction
-  ) => {
-    await interaction.deferReply({ ephemeral: true });
-    await interaction.editReply({ content: "Not active yet !" });
-  };
-
-  public autocompleteExecute: ExecuteAutocompleteCommandInteractionFunction = async (
-    client: SuwaClient,
-    interaction: AutocompleteInteraction
-  ) => {
-    await interaction.respond([]);
-  };
-
-  public subcommandBuilderCollection: Collection<
-    string,
-    ClientSlashCommandSubcommandBuilder | ClientSlashCommandSubcommandGroupBuilder
-  >;
+  public execute: ExecuteCommandInteractionFunction = defaultCommandExecuteFunction;
+  public autocompleteExecute: ExecuteAutocompleteCommandInteractionFunction = defaultAutocompleteExecuteFunction;
+  public subcommandBuilderCollection: Collection<string, SubcommandBuilderCollectionItem> = new Collection();
 
   constructor(localFilePath: string) {
     super();
     this.localFilePath = localFilePath;
-    this.subcommandBuilderCollection = new Collection<
-      string,
-      ClientSlashCommandSubcommandBuilder | ClientSlashCommandSubcommandGroupBuilder
-    >();
   }
 
-  setExecutor(execute: ExecuteCommandInteractionFunction): ClientSlashCommandBuilder {
-    this.execute = execute;
+  setExecutor(func: ExecuteCommandInteractionFunction) {
+    this.execute = func;
     return this;
   }
 
-  setAutocompleteExecutor(execute: ExecuteAutocompleteCommandInteractionFunction) {
-    this.autocompleteExecute = execute;
+  setAutocompleteExecutor(func: ExecuteAutocompleteCommandInteractionFunction) {
+    this.autocompleteExecute = func;
+    return this;
   }
 
-  loadSubcommandBuilderFolder() {
+  loadSubcommands() {
     const folder = this.localFilePath.replace(/\.(js|ts)$/, "");
     if (fs.existsSync(folder)) {
       fs.readdirSync(folder).forEach((item) => {
@@ -65,7 +44,6 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
           const subcommandBuilderPath = path.join(folder, item);
           const subcommandBuilder = require(subcommandBuilderPath);
 
-          const b = 12312;
           if (subcommandBuilder instanceof ClientSlashCommandSubcommandBuilder) {
             this.addSubcommand(subcommandBuilder);
             this.subcommandBuilderCollection.set(subcommandBuilder.name, subcommandBuilder);
@@ -79,7 +57,7 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
     }
   }
 
-  static getCommandStackName(
+  static getStackName(
     interaction: ChatInputCommandInteraction | AutocompleteInteraction,
     parseStack: boolean = false
   ): string | Array<string> {
@@ -88,7 +66,6 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
     try {
       commandParts.push(interaction.options.getSubcommandGroup() ?? "");
     } catch (error) {}
-
     try {
       commandParts.push(interaction.options.getSubcommand() ?? "");
     } catch (error) {}
@@ -144,63 +121,4 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
   }
 }
 
-class ClientSlashCommandSubcommandBuilder extends SlashCommandSubcommandBuilder {
-  public readonly localFilePath;
-  public execute: ExecuteCommandInteractionFunction = async (
-    client: SuwaClient,
-    interaction: ChatInputCommandInteraction
-  ) => {
-    await interaction.deferReply({ ephemeral: true });
-    await interaction.editReply({ content: "Not active yet !" });
-  };
-  public autocompleteExecute: ExecuteAutocompleteCommandInteractionFunction = async (
-    client: SuwaClient,
-    interaction: AutocompleteInteraction
-  ) => {
-    await interaction.respond([]);
-  };
-
-  constructor(localFilePath: string) {
-    super();
-
-    this.localFilePath = localFilePath;
-  }
-
-  setAutocompleteExecutor(execute: ExecuteAutocompleteCommandInteractionFunction) {
-    this.autocompleteExecute = execute;
-    return this;
-  }
-
-  setExecutor(execute: ExecuteCommandInteractionFunction): ClientSlashCommandSubcommandBuilder {
-    this.execute = execute;
-    return this;
-  }
-}
-
-class ClientSlashCommandSubcommandGroupBuilder extends SlashCommandSubcommandGroupBuilder {
-  public readonly localFilePath: string;
-  public subcommandBuilderCollection: Collection<string, ClientSlashCommandSubcommandBuilder>;
-  constructor(localFilePath: string) {
-    super();
-
-    this.localFilePath = localFilePath;
-    this.subcommandBuilderCollection = new Collection<string, ClientSlashCommandSubcommandBuilder>();
-  }
-
-  loadSubcommandBuilderFolder() {
-    const folder = this.localFilePath.replace(".js", "");
-    if (fs.existsSync(folder)) {
-      fs.readdirSync(folder).forEach((item) => {
-        if (item.endsWith(".ts")) {
-          const builder = require(path.join(folder, item));
-          if (builder instanceof ClientSlashCommandSubcommandBuilder) {
-            this.addSubcommand(builder);
-            this.subcommandBuilderCollection.set(builder.name, builder);
-          } else throw new ClientError("Invalid builder type!", ErrorCode.BUILDER_UNDEFINED_OR_INVALID);
-        }
-      });
-    }
-  }
-}
-
-export { ClientSlashCommandBuilder, ClientSlashCommandSubcommandBuilder };
+export default ClientSlashCommandBuilder;

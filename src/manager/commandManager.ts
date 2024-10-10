@@ -1,14 +1,10 @@
 import {
-  Collection,
-  CommandInteraction,
-  REST,
   RESTGetAPIApplicationGuildCommandsResult,
   RESTPostAPIChatInputApplicationCommandsJSONBody,
   Routes,
 } from "discord.js";
 
 import SuwaClient from "../bot";
-import CommandLoader from "./command/CommandLoader";
 import { Logger } from "../utils/Logger";
 
 interface GuildConfig {
@@ -51,12 +47,10 @@ class CommandManager {
       const currentCommands = (await this.client.rest.get(route)) as RESTGetAPIApplicationGuildCommandsResult;
 
       // Xóa từng lệnh hiện tại
-      const deletePromises = currentCommands.map(
-        async (command) => {
-          await this.client.rest.delete(`${route}/${command.id}`)
-          this.logger.log(`Remove command: ${command.name}`);
-        }
-      );
+      const deletePromises = currentCommands.map(async (command) => {
+        await this.client.rest.delete(`${route}/${command.id}`);
+        this.logger.log(`Remove command: ${command.name}`);
+      });
 
       await Promise.all(deletePromises);
 

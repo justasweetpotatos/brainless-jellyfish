@@ -4,7 +4,7 @@ import { Logger } from "../utils/Logger";
 import * as path from "path";
 import * as fs from "fs";
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
-import { ExecuteEventFunction } from "../interfaces/ExecuteFunction";
+import { ExecuteEventFunction } from "../structures/interface/executeFunctions";
 
 class EventHandler {
   private readonly client: SuwaClient;

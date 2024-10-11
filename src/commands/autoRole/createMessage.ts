@@ -9,7 +9,7 @@ import {
   VoiceChannel,
 } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { autoRoleSetCreateMessageWithEmbedOption } from "../commandOptions/booleanOptions";
 import {
   autoRoleSetButtonNameOption,
@@ -17,17 +17,15 @@ import {
   autoRoleSetMessageTitleOption,
 } from "../commandOptions/stringOptions";
 import { autoRoleSetMessageEmbedColorOption } from "../commandOptions/numberOptions";
+import { autoDeferReply, createEmbedWithTimestampAndCreateUser } from "../../utils/functions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("create-message")
   .setDescription("Create autoRole message and add buttons")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {
-    !interaction.deferred ? await interaction.deferReply({ ephemeral: true }) : undefined;
+    await autoDeferReply(interaction, { ephemeral: true });
 
-    const replyEmbed = new EmbedBuilder({
-      timestamp: Date.now(),
-      footer: { text: interaction.user.displayName, iconURL: interaction.user.avatarURL() ?? "" },
-    });
+    const replyEmbed = createEmbedWithTimestampAndCreateUser(interaction);
 
     const buttonId: string = interaction.options.getString("button-name", true);
     const createEmbed: boolean = interaction.options.getBoolean("create-embed", true);
@@ -35,18 +33,19 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
     const description = interaction.options.getString("description") ?? undefined;
     const embedColor = interaction.options.getNumber("color") ?? undefined;
 
-    const embed = new EmbedBuilder({ title: title, description: description, color: embedColor });
+    const embed = new EmbedBuilder({
+      title: title,
+      description: description,
+      color: embedColor,
+      footer: { text: "Autorole System" },
+      timestamp: Date.now(),
+    });
     const channel = interaction.channel;
-    // const role = await interaction.guild?.roles.fetch(buttonId.split("_").at(2) ?? "");
-
-    // let buttonData = require("../../components/buttons/general/autoRoleButton") as ButtonData;
-    // buttonData = { customId: buttonId, data: new ButtonBuilder(buttonData.data.data), execute: buttonData.execute };
 
     if (!channel) return;
     if (!interaction.guild) return;
     if (!(channel instanceof TextChannel || channel instanceof VoiceChannel)) return;
 
-    await channel.sendTyping();
     let message: Message;
 
     if (createEmbed) message = await channel.send({ embeds: [embed] });

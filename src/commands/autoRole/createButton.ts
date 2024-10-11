@@ -1,40 +1,29 @@
-import {
-  AutocompleteInteraction,
-  ButtonBuilder,
-  ButtonStyle,
-  ChatInputCommandInteraction,
-  Colors,
-  EmbedBuilder,
-} from "discord.js";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import { AutocompleteInteraction, ButtonBuilder, ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../../bot";
 import { autoRoleSetButtonEmojiOption, autoRoleSetButtonLabelOption } from "../commandOptions/stringOptions";
 import { ButtonData } from "../../interfaces/ComponentData";
 import { autoRoleCreateButtonRoleOption } from "../commandOptions/roleOptions";
 import { autoRoleSetButtonStyleOption } from "../commandOptions/numberOptions";
+import { autoDeferReply, createEmbedWithTimestampAndCreateUser } from "../../utils/functions";
+import { AutoRoleButtonCustomId } from "../../utils/enums/button";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("create-button")
   .setDescription("Create an auto role button")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {
-    !interaction.deferred ? await interaction.deferReply({ ephemeral: true }) : "";
+    await autoDeferReply(interaction, {ephemeral: true});
+    const replyEmbed = createEmbedWithTimestampAndCreateUser(interaction);
 
-    const replyEmbed = new EmbedBuilder({
-      footer: { text: interaction.user.displayName, iconURL: interaction.user.avatarURL() ?? "" },
-      timestamp: Date.now(),
-    });
+    if (!interaction.guild) return;
+    const bot = await interaction.guild.members.fetch(client.user?.id ?? "");
+    if (!bot) return;
 
     // Get data
     const label = interaction.options.getString("label", true);
     const role = interaction.options.getRole("role", true);
     let emojiId = interaction.options.getString("emoji");
     let buttonStyleId = interaction.options.getNumber("style") ?? 1;
-
-    // Checking data is existed
-    if (!interaction.guild) return;
-
-    const bot = await interaction.guild.members.fetch(client.user?.id ?? "");
-    if (!bot) return;
 
     if (bot.roles.highest.position < role.position) {
       replyEmbed
@@ -43,28 +32,28 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
           `The level of role ${role.toString()} is higher than the highest bot role level: ${bot.roles.highest}`
         )
         .setColor("Yellow");
+      await interaction.editReply({ embeds: [replyEmbed] });
       return;
     }
 
     let emoji = await interaction.guild.emojis.fetch(emojiId?.replace(/:.*?:/g, "").replace(/[<>]/g, "") ?? "");
 
     const buttonData: ButtonData = require("../../components/buttons/general/autoRoleButton");
-    let newButtonBuilder: ButtonBuilder = new ButtonBuilder({
-      customId: `${buttonData.customId}_${interaction.id}`,
-      label: label,
-      style: buttonStyleId,
-      emoji: emoji.id ?? undefined,
-    });
+
+    const autoroleButtonData: ButtonData = {
+      customId: `${AutoRoleButtonCustomId.AUTOROLE_BUTTON}_${interaction.id}_${role.id}_${label.trim()}`,
+      data: new ButtonBuilder({
+        customId: `${AutoRoleButtonCustomId.AUTOROLE_BUTTON}_${interaction.id}_${role.id}_${label.trim()}`,
+        label: label,
+        style: buttonStyleId,
+        emoji: emoji.id ?? undefined,
+      }),
+      execute: buttonData.execute,
+    };
 
     // get manager and create data
     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-
-    newButtonBuilder = manager.createAutoRoleButton({
-      customId: `${buttonData.customId}_${interaction.id}_${role.id}_${label.trim()}`,
-      data: newButtonBuilder,
-      execute: buttonData.execute,
-    });
-
+    manager.createAutoRoleButton(autoroleButtonData);
     client.autoRoleManager.updateGuildManager(interaction.guild, manager);
 
     await manager.previewButton(

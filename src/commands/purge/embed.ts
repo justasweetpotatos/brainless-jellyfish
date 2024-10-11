@@ -1,13 +1,13 @@
 import { ChatInputCommandInteraction, SlashCommandNumberOption } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { deleteMessages } from "../../utils/functions";
 import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("embed")
-  .setNameLocalization("vi", "mã-nhúng")
+  // .setNameLocalization("vi", "mã-nhúng")
   .setDescriptionLocalization("vi", "Xóa tin nhắn có chứa mã nhúng.")
   .setDescription("Purge message contain embed.")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {

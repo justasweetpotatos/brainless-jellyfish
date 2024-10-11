@@ -1,5 +1,5 @@
 import { ChannelType, ChatInputCommandInteraction, SlashCommandChannelOption, TextChannel } from "discord.js";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import SuwaClient from "../../bot";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)

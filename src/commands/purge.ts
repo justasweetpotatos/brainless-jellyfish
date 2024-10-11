@@ -1,5 +1,5 @@
 import { PermissionFlagsBits } from "discord.js";
-import { ClientSlashCommandBuilder } from "../models/ClientCommand";
+import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
 
 module.exports = new ClientSlashCommandBuilder(__filename)
   .setName("purge")

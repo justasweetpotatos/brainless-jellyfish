@@ -2,9 +2,10 @@ import { ButtonBuilder, ButtonInteraction, Colors, EmbedBuilder } from "discord.
 import { ButtonData } from "../../../interfaces/ComponentData";
 import SuwaClient from "../../../bot";
 import { ClientError, ErrorCode } from "../../../utils/error/ClientError";
+import { AutoRoleButtonCustomId } from "../../../utils/enums/button";
 
 const autoRoleButton: ButtonData = {
-  customId: "auto-role-button",
+  customId: AutoRoleButtonCustomId.AUTOROLE_BUTTON,
   data: new ButtonBuilder(),
   execute: async (client: SuwaClient, interaction: ButtonInteraction) => {
     interaction.deferred ? "" : await interaction.deferReply({ ephemeral: true });

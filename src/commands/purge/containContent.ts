@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { substringToDeleteMessageOption } from "../commandOptions/stringOptions";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { deleteMessages } from "../../utils/functions";
@@ -8,7 +8,7 @@ import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("contain")
-  .setNameLocalization("vi", "bao-gồm-nội-dung")
+  // .setNameLocalization("vi", "bao-gồm-nội-dung")
   .setDescriptionLocalization("vi", "Xóa toàn bộ tin nhắn có chứa nội dung được đề cập.")
   .setDescription("Removes all message containing a substring.")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {

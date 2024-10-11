@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, Colors, EmbedBuilder, PermissionFlagsBits, TextChannel } from "discord.js";
-import { ClientSlashCommandBuilder } from "../models/ClientCommand";
 import SuwaClient from "../bot";
 import { craftActionRowButtonComponents } from "../utils/functions";
 import { reactRoleDescriptionOption, reactRoleTitleOption } from "./commandOptions/stringOptions";
+import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
 
 module.exports = new ClientSlashCommandBuilder(__filename)
   .setName("send-react-role-message")

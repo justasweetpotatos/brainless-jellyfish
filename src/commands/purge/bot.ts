@@ -1,13 +1,13 @@
 import { ChatInputCommandInteraction, SlashCommandNumberOption } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { deleteMessages } from "../../utils/functions";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("bot")
-  .setNameLocalization("vi", "bot")
+  // .setNameLocalization("vi", "bot")
   .setDescriptionLocalization("vi", "Xóa tin nhắn của bot")
   .setDescription("Purge bot messages")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {

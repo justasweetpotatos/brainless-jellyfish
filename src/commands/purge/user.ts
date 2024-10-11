@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { deleteMessages } from "../../utils/functions";
 import { userToDeleteMessageOption } from "../commandOptions/userOptions";
@@ -8,7 +8,7 @@ import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("user")
-  .setNameLocalization("vi", "người-dùng")
+  // .setNameLocalization("vi", "người-dùng")
   .setDescriptionLocalization("vi", "loại bỏ toàn bộ tin nhắn từ người dùng.")
   .setDescription("Remove all message from user.")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {

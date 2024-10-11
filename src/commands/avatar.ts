@@ -1,9 +1,9 @@
 import { ActionRowBuilder, ButtonBuilder, ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../bot";
-import { ClientSlashCommandBuilder } from "../models/ClientCommand";
 import { userToGetAvatarOption } from "./commandOptions/userOptions";
 import { autoDeferReply, craftActionRowButtonComponents } from "../utils/functions";
 import { getAvatarInGuildOption } from "./commandOptions/booleanOptions";
+import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
 
 module.exports = new ClientSlashCommandBuilder(__filename)
   .setName("avatar")

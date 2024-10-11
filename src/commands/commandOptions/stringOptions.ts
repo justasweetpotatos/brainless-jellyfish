@@ -45,3 +45,8 @@ export const autoRoleSetMessageTitleOption = new SlashCommandStringOption()
 export const autoRoleSetMessageDesctiptionOption = new SlashCommandStringOption()
   .setName("description")
   .setDescription("Enter the description of message");
+
+// General
+export const setMessageIdOption = new SlashCommandStringOption()
+  .setName("message-id")
+  .setDescription("Enter the id of message.");

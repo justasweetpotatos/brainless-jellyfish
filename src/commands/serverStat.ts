@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 import SuwaClient from "../bot";
-import { ClientSlashCommandBuilder } from "../models/ClientCommand";
 import { autoDeferReply, createEmbedWithTimestampAndCreateUser } from "../utils/functions";
+import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
 
 module.exports = new ClientSlashCommandBuilder(__filename)
   .setName("guild-info")

@@ -1,13 +1,13 @@
 import { ChatInputCommandInteraction, SlashCommandNumberOption } from "discord.js";
 import SuwaClient from "../../bot";
-import { ClientSlashCommandSubcommandBuilder } from "../../models/ClientCommand";
+import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
 import { ClientError, ErrorCode } from "../../utils/error/ClientError";
 import { deleteMessages } from "../../utils/functions";
 import { numberToDeleteMessageOption } from "../commandOptions/numberOptions";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("attactment")
-  .setNameLocalization("vi", "tệp-tin")
+  // .setNameLocalization("vi", "tệp-tin")
   .setDescriptionLocalization("vi", "Xóa tin nhắn có chứa tệp tin.")
   .setDescription("Purge message contain attactment.")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {

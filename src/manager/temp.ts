@@ -10,8 +10,11 @@ import {
   Guild,
   ModalBuilder,
   TextChannel,
+  TextInputBuilder,
+  TextInputStyle,
   VoiceChannel,
 } from "discord.js";
+import { autoDeferReply } from "../utils/functions";
 
 declare type AutoroleButtonContent = {
   id: string;
@@ -42,19 +45,59 @@ class GuildAutoroleManager {
     this.guild = guild;
   }
 
-  async editMessageContent(messageId: string, interaction: CommandInteraction | ButtonInteraction) {
+  async sendEditContentModal(messageId: string, interaction: CommandInteraction | ButtonInteraction) {
     const content = this.messageContentCollection.get(messageId);
 
     // Return a error message
     if (!content) return;
+    const titleInputCustomId = `autorole-edit-title_${content.id}`;
+    const descriptionInputCustomId = `autorole-edit-description_${content.id}`;
 
-    if (interaction instanceof CommandInteraction) {
-        const modalBuilder = new ModalBuilder({title: "Edit content", })
+    await interaction.showModal(this.createEditModal(content));
 
+    await interaction.awaitModalSubmit({ time: 600_60 }).then(async (modalSubmitInteraction) => {
+      await autoDeferReply(modalSubmitInteraction);
 
+      if (!modalSubmitInteraction.customId.startsWith("autorole-edit-modal")) return;
 
-        await interaction.showModal(modalBuilder);
-    }
+      const title = modalSubmitInteraction.fields.getTextInputValue(titleInputCustomId);
+      const description = modalSubmitInteraction.fields.getTextInputValue(descriptionInputCustomId);
+
+      content.title = title;
+      content.description = description;
+
+      this.messageContentCollection.set(content.id, content);
+
+      await modalSubmitInteraction.editReply({})
+    });
+  }
+
+  createEditModal(oldContent: AutoroleMessageContent) {
+    const modalBuilder = new ModalBuilder({
+      title: "Edit Autorole Message",
+      customId: "autorole-edit-modal",
+    });
+
+    const titleInput = new TextInputBuilder()
+      .setLabel("Message title")
+      .setPlaceholder("Content Here")
+      .setCustomId(`autorole-edit-title_${oldContent.id}`)
+      .setRequired(true)
+      .setStyle(TextInputStyle.Short);
+
+    const descriptionInput = new TextInputBuilder()
+      .setLabel("Message description")
+      .setPlaceholder("Content Here")
+      .setCustomId(`autorole-edit-description_${oldContent.id}`)
+      .setRequired(true)
+      .setStyle(TextInputStyle.Paragraph);
+
+    const actionRow1 = new ActionRowBuilder<TextInputBuilder>().addComponents(titleInput);
+    const actionRow2 = new ActionRowBuilder<TextInputBuilder>().addComponents(descriptionInput);
+
+    modalBuilder.addComponents([actionRow1, actionRow2]);
+
+    return modalBuilder;
   }
 
   async createMessage(content: AutoroleMessageContent, channel: TextChannel | VoiceChannel) {

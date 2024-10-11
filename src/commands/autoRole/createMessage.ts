@@ -33,33 +33,27 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
     const description = interaction.options.getString("description") ?? undefined;
     const embedColor = interaction.options.getNumber("color") ?? undefined;
 
-    const embed = new EmbedBuilder({
-      title: title,
-      description: description,
-      color: embedColor,
-      footer: { text: "Autorole System" },
-      timestamp: Date.now(),
-    });
     const channel = interaction.channel;
 
     if (!channel) return;
     if (!interaction.guild) return;
     if (!(channel instanceof TextChannel || channel instanceof VoiceChannel)) return;
 
-    let message: Message;
-
-    if (createEmbed) message = await channel.send({ embeds: [embed] });
-    else message = await channel.send({ content: `**${title}**\n${description}` });
-
     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-    const statusMessage = await manager.setToMessage(message, buttonId);
+    await manager.createMessage(
+      {
+        buttonIdList: [buttonId],
+        channelId: "",
+        title: title,
+        description: description ?? "No description !",
+        id: "",
+        color: embedColor ?? Colors.Blurple,
+      },
+      channel
+    );
     client.autoRoleManager.updateGuildManager(interaction.guild, manager);
-
-    if (statusMessage) replyEmbed.setTitle("Action failed !").setDescription(statusMessage).setColor("Yellow");
-    else replyEmbed.setTitle("Action complete !").setColor("Green");
-
+    replyEmbed.setTitle("Action complete !").setColor("Green");
     await interaction.editReply({ embeds: [replyEmbed] });
-    //
   })
   .setAutocompleteExecutor(async (client: SuwaClient, interaction: AutocompleteInteraction) => {
     if (!interaction.guild) return;
@@ -67,7 +61,7 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
     switch (focusedValue.name) {
       case "button-name":
         const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-        const values = manager.getButtonOptionsForAutocompleteInteraction();
+        const values = manager.getButtonOptions();
         const filteredValues = values.filter((item) => item.name !== focusedValue.value);
         await interaction.respond(filteredValues);
         break;

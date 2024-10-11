@@ -17,10 +17,10 @@ class ComponentHandler {
 
       if (interaction.customId.startsWith(AutoRoleButtonCustomId.AUTOROLE_BUTTON)) {
         const manager = this.client.autoRoleManager.callGuildManager(interaction.guild);
-        await manager.executeButtonInteraction(interaction);
+        // await manager.executeButtonInteraction(interaction);
       } else if (interaction.customId.startsWith(AutoRoleButtonCustomId.REMOVING_BUTTON)) {
         const manager = this.client.autoRoleManager.callGuildManager(interaction.guild);
-        await manager.executeRemoveActionButtonInteraction(interaction);
+        // await manager.executeRemoveActionButtonInteraction(interaction);
       } else if (interaction.customId.startsWith("preview")) {
         await interaction.deferReply({ ephemeral: true });
         await interaction.editReply({ content: "Preview mode: true" });

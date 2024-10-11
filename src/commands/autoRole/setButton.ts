@@ -39,37 +39,37 @@ const setButton = new ClientSlashCommandSubcommandBuilder(__filename)
     // buttonData = { customId: buttonId, data: new ButtonBuilder(buttonData.data.data), execute: buttonData.execute };
 
     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-    const statusMessage = await manager.setToMessage(message, buttonId);
+    // const statusMessage = await manager.setToMessage(message, buttonId);
     client.autoRoleManager.updateGuildManager(interaction.guild, manager);
 
-    if (statusMessage) replyEmbed.setTitle("Action failed !").setDescription(statusMessage).setColor("Yellow");
-    else replyEmbed.setTitle("Action complete !").setColor("Green");
+    // if (statusMessage) replyEmbed.setTitle("Action failed !").setDescription(statusMessage).setColor("Yellow");
+    // else replyEmbed.setTitle("Action complete !").setColor("Green");
 
     await interaction.editReply({ embeds: [replyEmbed] });
   })
   .setAutocompleteExecutor(async (client: SuwaClient, interaction: AutocompleteInteraction) => {
     if (!interaction.guild) return;
-    const focusedValue = interaction.options.getFocused(true);
-    switch (focusedValue.name) {
-      case "button-name":
-        const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-        const values = manager.getButtonOptionsForAutocompleteInteraction();
-        const filteredValues = values.filter((item) => item.name !== focusedValue.value);
-        await interaction.respond(filteredValues);
-        break;
-      case "style":
-        const styleList = Object.entries(ButtonStyle).map(([key, value]) => {
-          return { name: key, value: value };
-        });
-        const filtered = styleList.filter((style) =>
-          style.name.toLowerCase().includes(focusedValue.value.toLowerCase())
-        );
-        await interaction.respond(filtered);
-        break;
-      default:
-        await interaction.respond([]);
-        break;
-    }
+    // const focusedValue = interaction.options.getFocused(true);
+    // switch (focusedValue.name) {
+    //   case "button-name":
+    //     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
+    //     const values = manager.getButtonOptionsForAutocompleteInteraction();
+    //     const filteredValues = values.filter((item) => item.name !== focusedValue.value);
+    //     await interaction.respond(filteredValues);
+    //     break;
+    //   case "style":
+    //     const styleList = Object.entries(ButtonStyle).map(([key, value]) => {
+    //       return { name: key, value: value };
+    //     });
+    //     const filtered = styleList.filter((style) =>
+    //       style.name.toLowerCase().includes(focusedValue.value.toLowerCase())
+    //     );
+    //     await interaction.respond(filtered);
+    //     break;
+    //   default:
+    //     await interaction.respond([]);
+    //     break;
+    // }
   })
   .addStringOption(autoRoleSetButtonNameOption)
   .addStringOption(autoRoleSetButtonMessageIdOption)

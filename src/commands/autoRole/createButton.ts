@@ -1,18 +1,17 @@
-import { AutocompleteInteraction, ButtonBuilder, ChatInputCommandInteraction } from "discord.js";
+import { AutocompleteInteraction, ChatInputCommandInteraction } from "discord.js";
 import SuwaClient from "../../bot";
 import { autoRoleSetButtonEmojiOption, autoRoleSetButtonLabelOption } from "../commandOptions/stringOptions";
-import { ButtonData } from "../../interfaces/ComponentData";
 import { autoRoleCreateButtonRoleOption } from "../commandOptions/roleOptions";
 import { autoRoleSetButtonStyleOption } from "../commandOptions/numberOptions";
 import { autoDeferReply, createEmbedWithTimestampAndCreateUser } from "../../utils/functions";
-import { AutoRoleButtonCustomId } from "../../utils/enums/button";
 import ClientSlashCommandSubcommandBuilder from "../../structures/ClientSlashCommandSubcommandBuilder";
+import { AutoroleButtonContent } from "../../structures/interface/autorole";
 
 module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
   .setName("create-button")
   .setDescription("Create an auto role button")
   .setExecutor(async (client: SuwaClient, interaction: ChatInputCommandInteraction) => {
-    await autoDeferReply(interaction, {ephemeral: true});
+    await autoDeferReply(interaction, { ephemeral: true });
     const replyEmbed = createEmbedWithTimestampAndCreateUser(interaction);
 
     if (!interaction.guild) return;
@@ -38,33 +37,22 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
 
     let emoji = await interaction.guild.emojis.fetch(emojiId?.replace(/:.*?:/g, "").replace(/[<>]/g, "") ?? "");
 
-    const buttonData: ButtonData = require("../../components/buttons/general/autoRoleButton");
-
-    const autoroleButtonData: ButtonData = {
-      customId: `${AutoRoleButtonCustomId.AUTOROLE_BUTTON}_${interaction.id}_${role.id}_${label.trim()}`,
-      data: new ButtonBuilder({
-        customId: `${AutoRoleButtonCustomId.AUTOROLE_BUTTON}_${interaction.id}_${role.id}_${label.trim()}`,
-        label: label,
-        style: buttonStyleId,
-        emoji: emoji.id ?? undefined,
-      }),
-      execute: buttonData.execute,
+    const buttonContent: AutoroleButtonContent = {
+      id: "",
+      customId: "",
+      label: label,
+      style: buttonStyleId,
+      roleId: role.id,
+      emojiId: emoji.id ?? "",
     };
 
     // get manager and create data
     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-    manager.createAutoRoleButton(autoroleButtonData);
+    await manager.createButton(buttonContent);
     client.autoRoleManager.updateGuildManager(interaction.guild, manager);
-
-    await manager.previewButton(
-      interaction,
-      new ButtonBuilder({
-        customId: `preview`,
-        label: label,
-        style: buttonStyleId,
-        emoji: emoji.id ?? undefined,
-      })
-    );
+    replyEmbed.setTitle("Action Complete !").setColor("Green");
+    await interaction.editReply({ embeds: [replyEmbed] });
+    await manager.previewButton(interaction, buttonContent);
   })
   .setAutocompleteExecutor(async (client: SuwaClient, interaction: AutocompleteInteraction) => {
     if (!interaction.guild) return;

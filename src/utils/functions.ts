@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder } from "@discordjs/builders";
 import {
   ButtonInteraction,
+  CommandInteraction,
   Interaction,
   InteractionDeferReplyOptions,
   ModalSubmitInteraction,
@@ -180,7 +181,7 @@ export async function deleteMessages(options: searchMessageOptions, interaction:
 }
 
 export async function autoDeferReply(
-  interaction: ChatInputCommandInteraction | ButtonInteraction | ModalSubmitInteraction,
+  interaction: CommandInteraction | ButtonInteraction | ModalSubmitInteraction,
   options?: InteractionDeferReplyOptions
 ) {
   if (!interaction.deferred) return interaction.deferReply(options);
@@ -188,7 +189,7 @@ export async function autoDeferReply(
 }
 
 export function createEmbedWithTimestampAndCreateUser(
-  interaction: ChatInputCommandInteraction | ButtonInteraction | ModalSubmitInteraction
+  interaction: CommandInteraction | ChatInputCommandInteraction | ButtonInteraction | ModalSubmitInteraction
 ) {
   return new EmbedBuilder({
     timestamp: Date.now(),

@@ -1,24 +1,18 @@
-import { ButtonStyle, Collection, Colors } from "discord.js";
-
-export interface GuildAutoroleConfig {
-  guildId: string;
-  autoroleMessagesContent: Collection<string, AutoroleMessageContent>;
-  autoroleButtonsData: Collection<string, AutoroleButtonData>;
+export interface AutoroleButtonContent {
+  id: string;
+  customId: string;
+  roleId: string;
+  style: number;
+  label: string;
+  emojiId?: string;
 }
 
 export interface AutoroleMessageContent {
   id: string;
-  title?: string;
-  description?: string;
-  color?: typeof Colors;
-}
+  channelId: string;
+  buttonIdList: Array<string>;
 
-export interface AutoroleButtonData {
-  id: string;
-  roleId: string;
-  customId?: string;
-  emojiId?: string;
-  label: string;
-  style?: ButtonStyle;
+  title: string;
+  description: string;
+  color: number;
 }
-

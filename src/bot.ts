@@ -10,7 +10,8 @@ import ComponentManager from "./manager/ComponentManager";
 import InteractionHandler from "./handler/InteractionHandler";
 import ComponentHandler from "./handler/ComponentHandler";
 import EventHandler from "./handler/EventHandler";
-import GetRoleButtonManager from "./manager/AutoRoleButtonManager";
+import GetRoleButtonManager from "./manager/AutoroleManager";
+import AutoroleManager from "./manager/AutoroleManager";
 
 class SuwaClient extends Client {
   public clientName: string = "Suwa_Client";
@@ -25,7 +26,7 @@ class SuwaClient extends Client {
   public interactionHandler: InteractionHandler;
   public commandHandler: CommandHandler;
   public commandManager: CommandManager;
-  public autoRoleManager: GetRoleButtonManager;
+  public autoRoleManager: AutoroleManager;
 
   public readonly clientMode: string = "debug";
 
@@ -53,7 +54,7 @@ class SuwaClient extends Client {
     this.componentManager = new ComponentManager(this);
     this.componentHandler = new ComponentHandler(this);
     this.commandManager = new CommandManager(this);
-    this.autoRoleManager = new GetRoleButtonManager(this);
+    this.autoRoleManager = new AutoroleManager(this);
   }
 
   displayStatus(): void {

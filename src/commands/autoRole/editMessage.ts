@@ -33,6 +33,6 @@ module.exports = new ClientSlashCommandSubcommandBuilder(__filename)
 
     if (!interaction.guild) return;
     const manager = client.autoRoleManager.callGuildManager(interaction.guild);
-    await manager.sendMessageEditingInterface(interaction, message);
+    // await manager.sendMessageEditingInterface(interaction, message);
   })
   .addStringOption(setMessageIdOption);

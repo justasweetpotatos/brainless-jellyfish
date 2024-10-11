@@ -2,9 +2,8 @@ import { Collection, Guild } from "discord.js";
 import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
 import GuildAutoroleManager from "./GuildAutoroleManager";
-import { GuildAutoroleConfig } from "../structures/interface/autorole";
 
-class GetRoleButtonManager {
+class AutoroleManager {
   private readonly client: SuwaClient;
   private readonly logger: Logger;
 
@@ -37,28 +36,4 @@ class GetRoleButtonManager {
   }
 }
 
-const mockData: Array<GuildAutoroleConfig> = [
-  {
-    guildId: "811939594882777128",
-    autoroleMessagesContent: new Collection(),
-    autoroleButtonsData: new Collection(),
-  },
-  {
-    guildId: "1165708698723823697",
-    autoroleMessagesContent: new Collection(),
-    autoroleButtonsData: new Collection(),
-  },
-  {
-    guildId: "1084323144870940772",
-    autoroleMessagesContent: new Collection(),
-    autoroleButtonsData: new Collection(),
-  },
-];
-
-export default GetRoleButtonManager;
-
-class GuildAutoroleManager {
-  constructor() {
-    
-  }
-}
+export default AutoroleManager;

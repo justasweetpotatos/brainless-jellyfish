@@ -23,7 +23,7 @@ import {
 import { ClientError, ErrorCode } from "../utils/error/ClientError";
 import { AutoRoleButtonCustomId } from "../utils/enums/button";
 
-class GuildAutoRoleManager {
+class GuildAutoroleManager {
   private readonly guild: Guild;
 
   public autoRoleButtonCollection: Collection<string, ButtonData>;
@@ -259,9 +259,9 @@ class GuildAutoRoleManager {
   }
 }
 
-export default GuildAutoRoleManager;
+export default GuildAutoroleManager;
 
-class GuildAutoRoleManager_v2 {
+class GuildAutoroleManager_v2 {
   public readonly guild: Guild;
   public readonly autoRoleMessageCollection: Collection<string, Message> = new Collection();
   public readonly autoRoleButtonCollection: Collection<string, ButtonData> = new Collection();
@@ -280,7 +280,7 @@ class GuildAutoRoleManager_v2 {
     const actionRowBuilder = new ActionRowBuilder<ButtonBuilder>();
 
     buttonBuilderList.forEach((buttonBuilder) => {
-      const buttonBuilderData = GuildAutoRoleManager_v2.paserButtonBuilderData(buttonBuilder);
+      const buttonBuilderData = GuildAutoroleManager_v2.paserButtonBuilderData(buttonBuilder);
       if (!buttonBuilderData) return;
       actionRowBuilder.setComponents(buttonBuilder.data);
     });

@@ -15,7 +15,7 @@
     "yt-stream": "^1.7.3"
   },
   "scripts": {
-    "start": "node ./app/index.js",
+    "start": "node ./src/index.js",
     "test": "node ./test.js"
   },
   "eslintConfig": {

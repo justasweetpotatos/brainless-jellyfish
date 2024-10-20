@@ -1,0 +1,31 @@
+"filename", "language", "JavaScript", "CSS", "JSON with Comments", "TypeScript JSX", "Markdown", "JSON", "HTML", "TypeScript", "comment", "blank", "total"
+"d:\workspace\brainless-jellyfish\src\dashboard\README.md", "Markdown", 0, 0, 0, 0, -26, 0, 0, 0, 0, -21, -47
+"d:\workspace\brainless-jellyfish\src\dashboard\dist\app-bundle.js", "JavaScript", -14, 0, 0, 0, 0, 0, 0, 0, -7, -4, -25
+"d:\workspace\brainless-jellyfish\src\dashboard\package-lock.json", "JSON", 0, 0, 0, 0, 0, -22326, 0, 0, 0, -1, -22327
+"d:\workspace\brainless-jellyfish\src\dashboard\package.json", "JSON", 0, 0, 0, 0, 0, -67, 0, 0, 0, -1, -68
+"d:\workspace\brainless-jellyfish\src\dashboard\public\index.html", "HTML", 0, 0, 0, 0, 0, 0, -20, 0, -23, -1, -44
+"d:\workspace\brainless-jellyfish\src\dashboard\public\manifest.json", "JSON", 0, 0, 0, 0, 0, -25, 0, 0, 0, -1, -26
+"d:\workspace\brainless-jellyfish\src\dashboard\src\App.css", "CSS", 0, -33, 0, 0, 0, 0, 0, 0, 0, -6, -39
+"d:\workspace\brainless-jellyfish\src\dashboard\src\App.tsx", "TypeScript JSX", 0, 0, 0, -34, 0, 0, 0, 0, 0, -4, -38
+"d:\workspace\brainless-jellyfish\src\dashboard\src\index.css", "CSS", 0, -26, 0, 0, 0, 0, 0, 0, -3, -6, -35
+"d:\workspace\brainless-jellyfish\src\dashboard\src\index.tsx", "TypeScript JSX", 0, 0, 0, -13, 0, 0, 0, 0, 0, -2, -15
+"d:\workspace\brainless-jellyfish\src\dashboard\src\react-app-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -2
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\BarChart.tsx", "TypeScript JSX", 0, 0, 0, -126, 0, 0, 0, 0, -1, -4, -131
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\GeographyChart.tsx", "TypeScript JSX", 0, 0, 0, -83, 0, 0, 0, 0, 0, -3, -86
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\Header.tsx", "TypeScript JSX", 0, 0, 0, -26, 0, 0, 0, 0, 0, -4, -30
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\LineChart.tsx", "TypeScript JSX", 0, 0, 0, -116, 0, 0, 0, 0, 0, -5, -121
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\PieChart.tsx", "TypeScript JSX", 0, 0, 0, -107, 0, 0, 0, 0, 0, -3, -110
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\ProgressCircle.tsx", "TypeScript JSX", 0, 0, 0, -20, 0, 0, 0, 0, 0, -3, -23
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\StatBox.tsx", "TypeScript JSX", 0, 0, 0, -51, 0, 0, 0, 0, 0, -5, -56
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\content\StatBox.tsx", "TypeScript JSX", 0, 0, 0, -60, 0, 0, 0, 0, 0, -6, -66
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\GlobalSideBar.tsx", "TypeScript JSX", 0, 0, 0, -182, 0, 0, 0, 0, -1, -14, -197
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\NavigationBar.tsx", "TypeScript JSX", 0, 0, 0, -40, 0, 0, 0, 0, 0, -5, -45
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockData.js", "JavaScript", -1299, 0, 0, 0, 0, 0, 0, 0, 0, -10, -1309
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockGeoFeatures.js", "JavaScript", -13549, 0, 0, 0, 0, 0, 0, 0, 0, -1, -13550
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Dashboard.tsx", "TypeScript JSX", 0, 0, 0, -15, 0, 0, 0, 0, 0, -3, -18
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Home.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\dashboard\Overview.tsx", "TypeScript JSX", 0, 0, 0, -219, 0, 0, 0, 0, -45, -11, -275
+"d:\workspace\brainless-jellyfish\src\dashboard\src\theme.js", "JavaScript", -218, 0, 0, 0, 0, 0, 0, 0, -5, -7, -230
+"d:\workspace\brainless-jellyfish\src\dashboard\tsconfig.json", "JSON with Comments", 0, 0, -26, 0, 0, 0, 0, 0, 0, -1, -27
+"d:\workspace\brainless-jellyfish\src\dashboard\webpack.config.js", "JavaScript", -23, 0, 0, 0, 0, 0, 0, 0, 0, -2, -25
+"Total", "-", -15103, -59, -26, -1092, -26, -22418, -20, 0, -86, -136, -38966

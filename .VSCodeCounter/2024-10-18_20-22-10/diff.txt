@@ -1,0 +1,76 @@
+Date : 2024-10-18 20:22:10
+Directory : d:\workspace\brainless-jellyfish\src
+Total : 29 files,  -38744 codes, -86 comments, -136 blanks, all -38966 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| TypeScript         |          1 |          0 |         -1 |         -1 |         -2 |
+| HTML               |          1 |        -20 |        -23 |         -1 |        -44 |
+| JSON with Comments |          1 |        -26 |          0 |         -1 |        -27 |
+| Markdown           |          1 |        -26 |          0 |        -21 |        -47 |
+| CSS                |          2 |        -59 |         -3 |        -12 |        -74 |
+| TypeScript JSX     |         15 |     -1,092 |        -47 |        -73 |     -1,212 |
+| JavaScript         |          5 |    -15,103 |        -12 |        -24 |    -15,139 |
+| JSON               |          3 |    -22,418 |          0 |         -3 |    -22,421 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                   | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                      |         29 |    -38,744 |        -86 |       -136 |    -38,966 |
+| dashboard                                                                                              |         29 |    -38,744 |        -86 |       -136 |    -38,966 |
+| dashboard (Files)                                                                                      |          5 |    -22,468 |          0 |        -26 |    -22,494 |
+| dashboard\dist                                                                                         |          1 |        -14 |         -7 |         -4 |        -25 |
+| dashboard\public                                                                                       |          2 |        -45 |        -23 |         -2 |        -70 |
+| dashboard\src                                                                                          |         21 |    -16,217 |        -56 |       -104 |    -16,377 |
+| dashboard\src (Files)                                                                                  |          6 |       -324 |         -9 |        -26 |       -359 |
+| dashboard\src\scene                                                                                    |         15 |    -15,893 |        -47 |        -78 |    -16,018 |
+| dashboard\src\scene\components                                                                         |         12 |    -15,659 |         -2 |        -63 |    -15,724 |
+| dashboard\src\scene\components\dashboard                                                               |         12 |    -15,659 |         -2 |        -63 |    -15,724 |
+| dashboard\src\scene\components\dashboard (Files)                                                       |          7 |       -529 |         -1 |        -27 |       -557 |
+| dashboard\src\scene\components\dashboard\content                                                       |          1 |        -60 |          0 |         -6 |        -66 |
+| dashboard\src\scene\components\dashboard\global                                                        |          2 |       -222 |         -1 |        -19 |       -242 |
+| dashboard\src\scene\components\dashboard\mock                                                          |          2 |    -14,848 |          0 |        -11 |    -14,859 |
+| dashboard\src\scene\routes                                                                             |          3 |       -234 |        -45 |        -15 |       -294 |
+| dashboard\src\scene\routes (Files)                                                                     |          2 |        -15 |          0 |         -4 |        -19 |
+| dashboard\src\scene\routes\dashboard                                                                   |          1 |       -219 |        -45 |        -11 |       -275 |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                               | language           | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| d:\workspace\brainless-jellyfish\src\dashboard\README.md                                               | Markdown           |        -26 |          0 |        -21 |        -47 |
+| d:\workspace\brainless-jellyfish\src\dashboard\dist\app-bundle.js                                      | JavaScript         |        -14 |         -7 |         -4 |        -25 |
+| d:\workspace\brainless-jellyfish\src\dashboard\package-lock.json                                       | JSON               |    -22,326 |          0 |         -1 |    -22,327 |
+| d:\workspace\brainless-jellyfish\src\dashboard\package.json                                            | JSON               |        -67 |          0 |         -1 |        -68 |
+| d:\workspace\brainless-jellyfish\src\dashboard\public\index.html                                       | HTML               |        -20 |        -23 |         -1 |        -44 |
+| d:\workspace\brainless-jellyfish\src\dashboard\public\manifest.json                                    | JSON               |        -25 |          0 |         -1 |        -26 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\App.css                                             | CSS                |        -33 |          0 |         -6 |        -39 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\App.tsx                                             | TypeScript JSX     |        -34 |          0 |         -4 |        -38 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\index.css                                           | CSS                |        -26 |         -3 |         -6 |        -35 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\index.tsx                                           | TypeScript JSX     |        -13 |          0 |         -2 |        -15 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\react-app-env.d.ts                                  | TypeScript         |          0 |         -1 |         -1 |         -2 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\BarChart.tsx             | TypeScript JSX     |       -126 |         -1 |         -4 |       -131 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\GeographyChart.tsx       | TypeScript JSX     |        -83 |          0 |         -3 |        -86 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\Header.tsx               | TypeScript JSX     |        -26 |          0 |         -4 |        -30 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\LineChart.tsx            | TypeScript JSX     |       -116 |          0 |         -5 |       -121 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\PieChart.tsx             | TypeScript JSX     |       -107 |          0 |         -3 |       -110 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\ProgressCircle.tsx       | TypeScript JSX     |        -20 |          0 |         -3 |        -23 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\StatBox.tsx              | TypeScript JSX     |        -51 |          0 |         -5 |        -56 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\content\StatBox.tsx      | TypeScript JSX     |        -60 |          0 |         -6 |        -66 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\GlobalSideBar.tsx | TypeScript JSX     |       -182 |         -1 |        -14 |       -197 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\NavigationBar.tsx | TypeScript JSX     |        -40 |          0 |         -5 |        -45 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockData.js         | JavaScript         |     -1,299 |          0 |        -10 |     -1,309 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockGeoFeatures.js  | JavaScript         |    -13,549 |          0 |         -1 |    -13,550 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Dashboard.tsx                          | TypeScript JSX     |        -15 |          0 |         -3 |        -18 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Home.tsx                               | TypeScript JSX     |          0 |          0 |         -1 |         -1 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\dashboard\Overview.tsx                 | TypeScript JSX     |       -219 |        -45 |        -11 |       -275 |
+| d:\workspace\brainless-jellyfish\src\dashboard\src\theme.js                                            | JavaScript         |       -218 |         -5 |         -7 |       -230 |
+| d:\workspace\brainless-jellyfish\src\dashboard\tsconfig.json                                           | JSON with Comments |        -26 |          0 |         -1 |        -27 |
+| d:\workspace\brainless-jellyfish\src\dashboard\webpack.config.js                                       | JavaScript         |        -23 |          0 |         -2 |        -25 |
+| Total                                                                                                  |                    |    -38,744 |        -86 |       -136 |    -38,966 |
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

@@ -1,0 +1,109 @@
+"filename", "language", "TypeScript", "JavaScript", "JSON with Comments", "Markdown", "JSON", "CSS", "TypeScript JSX", "HTML", "comment", "blank", "total"
+"d:\workspace\brainless-jellyfish\src\bot.ts", "TypeScript", 86, 0, 0, 0, 0, 0, 0, 0, 6, 14, 106
+"d:\workspace\brainless-jellyfish\src\commands\autoRole.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"d:\workspace\brainless-jellyfish\src\commands\autoRole\createButton.ts", "TypeScript", 91, 0, 0, 0, 0, 0, 0, 0, 3, 13, 107
+"d:\workspace\brainless-jellyfish\src\commands\autoRole\createMessage.ts", "TypeScript", 78, 0, 0, 0, 0, 0, 0, 0, 4, 12, 94
+"d:\workspace\brainless-jellyfish\src\commands\autoRole\lockDown.ts", "TypeScript", 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4
+"d:\workspace\brainless-jellyfish\src\commands\autoRole\setButton.ts", "TypeScript", 66, 0, 0, 0, 0, 0, 0, 0, 2, 11, 79
+"d:\workspace\brainless-jellyfish\src\commands\avatar.ts", "TypeScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 8, 34
+"d:\workspace\brainless-jellyfish\src\commands\commandOptions\booleanOptions.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"d:\workspace\brainless-jellyfish\src\commands\commandOptions\numberOptions.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 0, 3, 18
+"d:\workspace\brainless-jellyfish\src\commands\commandOptions\roleOptions.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"d:\workspace\brainless-jellyfish\src\commands\commandOptions\stringOptions.ts", "TypeScript", 38, 0, 0, 0, 0, 0, 0, 0, 0, 10, 48
+"d:\workspace\brainless-jellyfish\src\commands\commandOptions\userOptions.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 5, 18
+"d:\workspace\brainless-jellyfish\src\commands\connectingWords.ts", "TypeScript", 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 11
+"d:\workspace\brainless-jellyfish\src\commands\connectingWords\removeChannel.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 4, 3, 24
+"d:\workspace\brainless-jellyfish\src\commands\connectingWords\setChannel.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 2, 3, 23
+"d:\workspace\brainless-jellyfish\src\commands\connectingWords\setting.ts", "TypeScript", 22, 0, 0, 0, 0, 0, 0, 0, 0, 3, 25
+"d:\workspace\brainless-jellyfish\src\commands\drop\noitu.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"d:\workspace\brainless-jellyfish\src\commands\drop\noitu\config.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 4, 10
+"d:\workspace\brainless-jellyfish\src\commands\drop\noitu\config\create.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"d:\workspace\brainless-jellyfish\src\commands\drop\noitu\getHints.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"d:\workspace\brainless-jellyfish\src\commands\drop\ping.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 11
+"d:\workspace\brainless-jellyfish\src\commands\drop\reloadCommand.ts", "TypeScript", 15, 0, 0, 0, 0, 0, 0, 0, 4, 2, 21
+"d:\workspace\brainless-jellyfish\src\commands\drop\voiceChannelManager.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 3, 10
+"d:\workspace\brainless-jellyfish\src\commands\drop\voiceChannelManager\kickAllUsers.ts", "TypeScript", 40, 0, 0, 0, 0, 0, 0, 0, 0, 7, 47
+"d:\workspace\brainless-jellyfish\src\commands\purge.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"d:\workspace\brainless-jellyfish\src\commands\purge\all.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 1, 4, 22
+"d:\workspace\brainless-jellyfish\src\commands\purge\attactment.ts", "TypeScript", 20, 0, 0, 0, 0, 0, 0, 0, 1, 4, 25
+"d:\workspace\brainless-jellyfish\src\commands\purge\bot.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 1, 4, 22
+"d:\workspace\brainless-jellyfish\src\commands\purge\containContent.ts", "TypeScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 4, 29
+"d:\workspace\brainless-jellyfish\src\commands\purge\embed.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 1, 4, 22
+"d:\workspace\brainless-jellyfish\src\commands\purge\user.ts", "TypeScript", 22, 0, 0, 0, 0, 0, 0, 0, 1, 4, 27
+"d:\workspace\brainless-jellyfish\src\commands\reloadClient.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 0, 3, 20
+"d:\workspace\brainless-jellyfish\src\commands\sendReactRoleMessage.ts", "TypeScript", 31, 0, 0, 0, 0, 0, 0, 0, 0, 5, 36
+"d:\workspace\brainless-jellyfish\src\commands\serverStat.ts", "TypeScript", 33, 0, 0, 0, 0, 0, 0, 0, 0, 8, 41
+"d:\workspace\brainless-jellyfish\src\components\buttons\connectingWords\SetButton.ts", "TypeScript", 11, 0, 0, 0, 0, 0, 0, 0, 0, 3, 14
+"d:\workspace\brainless-jellyfish\src\components\buttons\general\CloseButton.ts", "TypeScript", 11, 0, 0, 0, 0, 0, 0, 0, 0, 3, 14
+"d:\workspace\brainless-jellyfish\src\components\buttons\general\SuwaReactNeuronRole.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 1, 3, 34
+"d:\workspace\brainless-jellyfish\src\components\buttons\general\autoRoleButton.ts", "TypeScript", 40, 0, 0, 0, 0, 0, 0, 0, 0, 6, 46
+"d:\workspace\brainless-jellyfish\src\dashboard\README.md", "Markdown", 0, 0, 0, 26, 0, 0, 0, 0, 0, 21, 47
+"d:\workspace\brainless-jellyfish\src\dashboard\dist\app-bundle.js", "JavaScript", 0, 14, 0, 0, 0, 0, 0, 0, 7, 4, 25
+"d:\workspace\brainless-jellyfish\src\dashboard\package-lock.json", "JSON", 0, 0, 0, 0, 22326, 0, 0, 0, 0, 1, 22327
+"d:\workspace\brainless-jellyfish\src\dashboard\package.json", "JSON", 0, 0, 0, 0, 67, 0, 0, 0, 0, 1, 68
+"d:\workspace\brainless-jellyfish\src\dashboard\public\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 20, 23, 1, 44
+"d:\workspace\brainless-jellyfish\src\dashboard\public\manifest.json", "JSON", 0, 0, 0, 0, 25, 0, 0, 0, 0, 1, 26
+"d:\workspace\brainless-jellyfish\src\dashboard\src\App.css", "CSS", 0, 0, 0, 0, 0, 33, 0, 0, 0, 6, 39
+"d:\workspace\brainless-jellyfish\src\dashboard\src\App.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 34, 0, 0, 4, 38
+"d:\workspace\brainless-jellyfish\src\dashboard\src\index.css", "CSS", 0, 0, 0, 0, 0, 26, 0, 0, 3, 6, 35
+"d:\workspace\brainless-jellyfish\src\dashboard\src\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 13, 0, 0, 2, 15
+"d:\workspace\brainless-jellyfish\src\dashboard\src\react-app-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\BarChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 126, 0, 1, 4, 131
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\GeographyChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 83, 0, 0, 3, 86
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\Header.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 26, 0, 0, 4, 30
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\LineChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 116, 0, 0, 5, 121
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\PieChart.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 107, 0, 0, 3, 110
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\ProgressCircle.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 20, 0, 0, 3, 23
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\StatBox.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 51, 0, 0, 5, 56
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\content\StatBox.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 60, 0, 0, 6, 66
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\GlobalSideBar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 182, 0, 1, 14, 197
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\global\NavigationBar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 40, 0, 0, 5, 45
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockData.js", "JavaScript", 0, 1299, 0, 0, 0, 0, 0, 0, 0, 10, 1309
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\components\dashboard\mock\mockGeoFeatures.js", "JavaScript", 0, 13549, 0, 0, 0, 0, 0, 0, 0, 1, 13550
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Dashboard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 15, 0, 0, 3, 18
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\Home.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+"d:\workspace\brainless-jellyfish\src\dashboard\src\scene\routes\dashboard\Overview.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 219, 0, 45, 11, 275
+"d:\workspace\brainless-jellyfish\src\dashboard\src\theme.js", "JavaScript", 0, 218, 0, 0, 0, 0, 0, 0, 5, 7, 230
+"d:\workspace\brainless-jellyfish\src\dashboard\tsconfig.json", "JSON with Comments", 0, 0, 26, 0, 0, 0, 0, 0, 0, 1, 27
+"d:\workspace\brainless-jellyfish\src\dashboard\webpack.config.js", "JavaScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 2, 25
+"d:\workspace\brainless-jellyfish\src\database\connector.ts", "TypeScript", 37, 0, 0, 0, 0, 0, 0, 0, 0, 9, 46
+"d:\workspace\brainless-jellyfish\src\events\interactionCreate.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 0, 0, 3, 13
+"d:\workspace\brainless-jellyfish\src\events\messageCreate.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 11
+"d:\workspace\brainless-jellyfish\src\handler\CommandHandler.ts", "TypeScript", 80, 0, 0, 0, 0, 0, 0, 0, 0, 15, 95
+"d:\workspace\brainless-jellyfish\src\handler\ComponentHandler.ts", "TypeScript", 33, 0, 0, 0, 0, 0, 0, 0, 0, 5, 38
+"d:\workspace\brainless-jellyfish\src\handler\EventHandler.ts", "TypeScript", 41, 0, 0, 0, 0, 0, 0, 0, 0, 5, 46
+"d:\workspace\brainless-jellyfish\src\handler\InteractionHandler.ts", "TypeScript", 19, 0, 0, 0, 0, 0, 0, 0, 1, 4, 24
+"d:\workspace\brainless-jellyfish\src\index.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 5, 13
+"d:\workspace\brainless-jellyfish\src\interfaces\ComponentData.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 4, 22
+"d:\workspace\brainless-jellyfish\src\interfaces\ConnectingWords.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 0, 0, 2, 5, 23
+"d:\workspace\brainless-jellyfish\src\interfaces\ErrorData.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 0, 0, 0, 4, 22
+"d:\workspace\brainless-jellyfish\src\interfaces\EventData.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"d:\workspace\brainless-jellyfish\src\interfaces\options.ts", "TypeScript", 11, 0, 0, 0, 0, 0, 0, 0, 0, 2, 13
+"d:\workspace\brainless-jellyfish\src\manager\AutoRoleButtonManager.ts", "TypeScript", 29, 0, 0, 0, 0, 0, 0, 0, 3, 8, 40
+"d:\workspace\brainless-jellyfish\src\manager\ComponentManager.ts", "TypeScript", 47, 0, 0, 0, 0, 0, 0, 0, 0, 12, 59
+"d:\workspace\brainless-jellyfish\src\manager\GuildAutoRoleButtonManager.ts", "TypeScript", 273, 0, 0, 0, 0, 0, 0, 0, 0, 46, 319
+"d:\workspace\brainless-jellyfish\src\manager\commandManager.ts", "TypeScript", 52, 0, 0, 0, 0, 0, 0, 0, 3, 16, 71
+"d:\workspace\brainless-jellyfish\src\manager\command\CommandLoader.ts", "TypeScript", 206, 0, 0, 0, 0, 0, 0, 0, 0, 43, 249
+"d:\workspace\brainless-jellyfish\src\manager\connectorManager.ts", "TypeScript", 58, 0, 0, 0, 0, 0, 0, 0, 0, 13, 71
+"d:\workspace\brainless-jellyfish\src\manager\event\EventLoader.ts", "TypeScript", 5, 0, 0, 0, 0, 0, 0, 0, 1, 8, 14
+"d:\workspace\brainless-jellyfish\src\manager\event\EventManager.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 11
+"d:\workspace\brainless-jellyfish\src\manager\games\ConnectingWordChannelManager.ts", "TypeScript", 120, 0, 0, 0, 0, 0, 0, 0, 0, 15, 135
+"d:\workspace\brainless-jellyfish\src\manager\games\connectingWordGuildHandler.ts", "TypeScript", 11, 0, 0, 0, 0, 0, 0, 0, 0, 5, 16
+"d:\workspace\brainless-jellyfish\src\manager\guild\GuildManager.ts", "TypeScript", 26, 0, 0, 0, 0, 0, 0, 0, 0, 7, 33
+"d:\workspace\brainless-jellyfish\src\manager\message\MessageTrafficManager.ts", "TypeScript", 30, 0, 0, 0, 0, 0, 0, 0, 0, 6, 36
+"d:\workspace\brainless-jellyfish\src\manager\message\MessageTrafficTracker.ts", "TypeScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 7, 32
+"d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandBuilder.ts", "TypeScript", 108, 0, 0, 0, 0, 0, 0, 0, 0, 17, 125
+"d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandSubcommandBuilder.ts", "TypeScript", 24, 0, 0, 0, 0, 0, 0, 0, 0, 7, 31
+"d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandSubcommandGroupBuilder.ts", "TypeScript", 37, 0, 0, 0, 0, 0, 0, 0, 0, 6, 43
+"d:\workspace\brainless-jellyfish\src\structures\interface\executeFunctions.ts", "TypeScript", 14, 0, 0, 0, 0, 0, 0, 0, 8, 9, 31
+"d:\workspace\brainless-jellyfish\src\test.ts", "TypeScript", 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"d:\workspace\brainless-jellyfish\src\utils\Logger.ts", "TypeScript", 80, 0, 0, 0, 0, 0, 0, 0, 33, 16, 129
+"d:\workspace\brainless-jellyfish\src\utils\builder\EmbedComponentBuilder.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 16, 4, 20
+"d:\workspace\brainless-jellyfish\src\utils\defaultFunctions.ts", "TypeScript", 19, 0, 0, 0, 0, 0, 0, 0, 0, 3, 22
+"d:\workspace\brainless-jellyfish\src\utils\enums\ConnectingWordMessageType.ts", "TypeScript", 7, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"d:\workspace\brainless-jellyfish\src\utils\enums\LogMessageType.ts", "TypeScript", 8, 0, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"d:\workspace\brainless-jellyfish\src\utils\enums\button.ts", "TypeScript", 10, 0, 0, 0, 0, 0, 0, 0, 0, 2, 12
+"d:\workspace\brainless-jellyfish\src\utils\error\ClientError.ts", "TypeScript", 55, 0, 0, 0, 0, 0, 0, 0, 98, 23, 176
+"d:\workspace\brainless-jellyfish\src\utils\error\ClientErrorHandler.ts", "TypeScript", 96, 0, 0, 0, 0, 0, 0, 0, 4, 22, 122
+"d:\workspace\brainless-jellyfish\src\utils\functions.ts", "TypeScript", 170, 0, 0, 0, 0, 0, 0, 0, 2, 26, 198
+"Total", "-", 2716, 15103, 26, 26, 22418, 59, 1092, 20, 288, 713, 42461

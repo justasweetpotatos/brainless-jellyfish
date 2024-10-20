@@ -1,0 +1,138 @@
+Date : 2024-10-18 20:22:10
+Directory : d:\workspace\brainless-jellyfish\src
+Total : 78 files,  2716 codes, 202 comments, 577 blanks, all 3495 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |         78 |      2,716 |        202 |        577 |      3,495 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |         78 |      2,716 |        202 |        577 |      3,495 |
+| . (Files)                                                                                   |          3 |        100 |          6 |         21 |        127 |
+| commands                                                                                    |         33 |        711 |         24 |        151 |        886 |
+| commands (Files)                                                                            |          7 |        129 |          0 |         30 |        159 |
+| commands\autoRole                                                                           |          4 |        237 |          9 |         38 |        284 |
+| commands\commandOptions                                                                     |          5 |         76 |          0 |         22 |         98 |
+| commands\connectingWords                                                                    |          3 |         57 |          6 |          9 |         72 |
+| commands\drop                                                                               |          8 |         94 |          4 |         28 |        126 |
+| commands\drop (Files)                                                                       |          4 |         36 |          4 |         11 |         51 |
+| commands\drop\noitu                                                                         |          3 |         18 |          0 |         10 |         28 |
+| commands\drop\noitu (Files)                                                                 |          2 |         12 |          0 |          7 |         19 |
+| commands\drop\noitu\config                                                                  |          1 |          6 |          0 |          3 |          9 |
+| commands\drop\voiceChannelManager                                                           |          1 |         40 |          0 |          7 |         47 |
+| commands\purge                                                                              |          6 |        118 |          5 |         24 |        147 |
+| components                                                                                  |          4 |         92 |          1 |         15 |        108 |
+| components\buttons                                                                          |          4 |         92 |          1 |         15 |        108 |
+| components\buttons\connectingWords                                                          |          1 |         11 |          0 |          3 |         14 |
+| components\buttons\general                                                                  |          3 |         81 |          1 |         12 |         94 |
+| database                                                                                    |          1 |         37 |          0 |          9 |         46 |
+| events                                                                                      |          2 |         18 |          0 |          6 |         24 |
+| handler                                                                                     |          4 |        173 |          1 |         29 |        203 |
+| interfaces                                                                                  |          5 |         68 |          2 |         17 |         87 |
+| manager                                                                                     |         13 |        889 |          7 |        190 |      1,086 |
+| manager (Files)                                                                             |          5 |        459 |          6 |         95 |        560 |
+| manager\command                                                                             |          1 |        206 |          0 |         43 |        249 |
+| manager\event                                                                               |          2 |         12 |          1 |         12 |         25 |
+| manager\games                                                                               |          2 |        131 |          0 |         20 |        151 |
+| manager\guild                                                                               |          1 |         26 |          0 |          7 |         33 |
+| manager\message                                                                             |          2 |         55 |          0 |         13 |         68 |
+| structures                                                                                  |          4 |        183 |          8 |         39 |        230 |
+| structures (Files)                                                                          |          3 |        169 |          0 |         30 |        199 |
+| structures\interface                                                                        |          1 |         14 |          8 |          9 |         31 |
+| utils                                                                                       |          9 |        445 |        153 |        100 |        698 |
+| utils (Files)                                                                               |          3 |        269 |         35 |         45 |        349 |
+| utils\builder                                                                               |          1 |          0 |         16 |          4 |         20 |
+| utils\enums                                                                                 |          3 |         25 |          0 |          6 |         31 |
+| utils\error                                                                                 |          2 |        151 |        102 |         45 |        298 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                    | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\workspace\brainless-jellyfish\src\bot.ts                                                 | TypeScript |         86 |          6 |         14 |        106 |
+| d:\workspace\brainless-jellyfish\src\commands\autoRole.ts                                   | TypeScript |          6 |          0 |          2 |          8 |
+| d:\workspace\brainless-jellyfish\src\commands\autoRole\createButton.ts                      | TypeScript |         91 |          3 |         13 |        107 |
+| d:\workspace\brainless-jellyfish\src\commands\autoRole\createMessage.ts                     | TypeScript |         78 |          4 |         12 |         94 |
+| d:\workspace\brainless-jellyfish\src\commands\autoRole\lockDown.ts                          | TypeScript |          2 |          0 |          2 |          4 |
+| d:\workspace\brainless-jellyfish\src\commands\autoRole\setButton.ts                         | TypeScript |         66 |          2 |         11 |         79 |
+| d:\workspace\brainless-jellyfish\src\commands\avatar.ts                                     | TypeScript |         26 |          0 |          8 |         34 |
+| d:\workspace\brainless-jellyfish\src\commands\commandOptions\booleanOptions.ts              | TypeScript |          5 |          0 |          2 |          7 |
+| d:\workspace\brainless-jellyfish\src\commands\commandOptions\numberOptions.ts               | TypeScript |         15 |          0 |          3 |         18 |
+| d:\workspace\brainless-jellyfish\src\commands\commandOptions\roleOptions.ts                 | TypeScript |          5 |          0 |          2 |          7 |
+| d:\workspace\brainless-jellyfish\src\commands\commandOptions\stringOptions.ts               | TypeScript |         38 |          0 |         10 |         48 |
+| d:\workspace\brainless-jellyfish\src\commands\commandOptions\userOptions.ts                 | TypeScript |         13 |          0 |          5 |         18 |
+| d:\workspace\brainless-jellyfish\src\commands\connectingWords.ts                            | TypeScript |          9 |          0 |          2 |         11 |
+| d:\workspace\brainless-jellyfish\src\commands\connectingWords\removeChannel.ts              | TypeScript |         17 |          4 |          3 |         24 |
+| d:\workspace\brainless-jellyfish\src\commands\connectingWords\setChannel.ts                 | TypeScript |         18 |          2 |          3 |         23 |
+| d:\workspace\brainless-jellyfish\src\commands\connectingWords\setting.ts                    | TypeScript |         22 |          0 |          3 |         25 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\noitu.ts                                 | TypeScript |          6 |          0 |          3 |          9 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\noitu\config.ts                          | TypeScript |          6 |          0 |          4 |         10 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\noitu\config\create.ts                   | TypeScript |          6 |          0 |          3 |          9 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\noitu\getHints.ts                        | TypeScript |          6 |          0 |          3 |          9 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\ping.ts                                  | TypeScript |          8 |          0 |          3 |         11 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\reloadCommand.ts                         | TypeScript |         15 |          4 |          2 |         21 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\voiceChannelManager.ts                   | TypeScript |          7 |          0 |          3 |         10 |
+| d:\workspace\brainless-jellyfish\src\commands\drop\voiceChannelManager\kickAllUsers.ts      | TypeScript |         40 |          0 |          7 |         47 |
+| d:\workspace\brainless-jellyfish\src\commands\purge.ts                                      | TypeScript |          7 |          0 |          2 |          9 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\all.ts                                  | TypeScript |         17 |          1 |          4 |         22 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\attactment.ts                           | TypeScript |         20 |          1 |          4 |         25 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\bot.ts                                  | TypeScript |         17 |          1 |          4 |         22 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\containContent.ts                       | TypeScript |         25 |          0 |          4 |         29 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\embed.ts                                | TypeScript |         17 |          1 |          4 |         22 |
+| d:\workspace\brainless-jellyfish\src\commands\purge\user.ts                                 | TypeScript |         22 |          1 |          4 |         27 |
+| d:\workspace\brainless-jellyfish\src\commands\reloadClient.ts                               | TypeScript |         17 |          0 |          3 |         20 |
+| d:\workspace\brainless-jellyfish\src\commands\sendReactRoleMessage.ts                       | TypeScript |         31 |          0 |          5 |         36 |
+| d:\workspace\brainless-jellyfish\src\commands\serverStat.ts                                 | TypeScript |         33 |          0 |          8 |         41 |
+| d:\workspace\brainless-jellyfish\src\components\buttons\connectingWords\SetButton.ts        | TypeScript |         11 |          0 |          3 |         14 |
+| d:\workspace\brainless-jellyfish\src\components\buttons\general\CloseButton.ts              | TypeScript |         11 |          0 |          3 |         14 |
+| d:\workspace\brainless-jellyfish\src\components\buttons\general\SuwaReactNeuronRole.ts      | TypeScript |         30 |          1 |          3 |         34 |
+| d:\workspace\brainless-jellyfish\src\components\buttons\general\autoRoleButton.ts           | TypeScript |         40 |          0 |          6 |         46 |
+| d:\workspace\brainless-jellyfish\src\database\connector.ts                                  | TypeScript |         37 |          0 |          9 |         46 |
+| d:\workspace\brainless-jellyfish\src\events\interactionCreate.ts                            | TypeScript |         10 |          0 |          3 |         13 |
+| d:\workspace\brainless-jellyfish\src\events\messageCreate.ts                                | TypeScript |          8 |          0 |          3 |         11 |
+| d:\workspace\brainless-jellyfish\src\handler\CommandHandler.ts                              | TypeScript |         80 |          0 |         15 |         95 |
+| d:\workspace\brainless-jellyfish\src\handler\ComponentHandler.ts                            | TypeScript |         33 |          0 |          5 |         38 |
+| d:\workspace\brainless-jellyfish\src\handler\EventHandler.ts                                | TypeScript |         41 |          0 |          5 |         46 |
+| d:\workspace\brainless-jellyfish\src\handler\InteractionHandler.ts                          | TypeScript |         19 |          1 |          4 |         24 |
+| d:\workspace\brainless-jellyfish\src\index.ts                                               | TypeScript |          8 |          0 |          5 |         13 |
+| d:\workspace\brainless-jellyfish\src\interfaces\ComponentData.ts                            | TypeScript |         18 |          0 |          4 |         22 |
+| d:\workspace\brainless-jellyfish\src\interfaces\ConnectingWords.ts                          | TypeScript |         16 |          2 |          5 |         23 |
+| d:\workspace\brainless-jellyfish\src\interfaces\ErrorData.ts                                | TypeScript |         18 |          0 |          4 |         22 |
+| d:\workspace\brainless-jellyfish\src\interfaces\EventData.ts                                | TypeScript |          5 |          0 |          2 |          7 |
+| d:\workspace\brainless-jellyfish\src\interfaces\options.ts                                  | TypeScript |         11 |          0 |          2 |         13 |
+| d:\workspace\brainless-jellyfish\src\manager\AutoRoleButtonManager.ts                       | TypeScript |         29 |          3 |          8 |         40 |
+| d:\workspace\brainless-jellyfish\src\manager\ComponentManager.ts                            | TypeScript |         47 |          0 |         12 |         59 |
+| d:\workspace\brainless-jellyfish\src\manager\GuildAutoRoleButtonManager.ts                  | TypeScript |        273 |          0 |         46 |        319 |
+| d:\workspace\brainless-jellyfish\src\manager\commandManager.ts                              | TypeScript |         52 |          3 |         16 |         71 |
+| d:\workspace\brainless-jellyfish\src\manager\command\CommandLoader.ts                       | TypeScript |        206 |          0 |         43 |        249 |
+| d:\workspace\brainless-jellyfish\src\manager\connectorManager.ts                            | TypeScript |         58 |          0 |         13 |         71 |
+| d:\workspace\brainless-jellyfish\src\manager\event\EventLoader.ts                           | TypeScript |          5 |          1 |          8 |         14 |
+| d:\workspace\brainless-jellyfish\src\manager\event\EventManager.ts                          | TypeScript |          7 |          0 |          4 |         11 |
+| d:\workspace\brainless-jellyfish\src\manager\games\ConnectingWordChannelManager.ts          | TypeScript |        120 |          0 |         15 |        135 |
+| d:\workspace\brainless-jellyfish\src\manager\games\connectingWordGuildHandler.ts            | TypeScript |         11 |          0 |          5 |         16 |
+| d:\workspace\brainless-jellyfish\src\manager\guild\GuildManager.ts                          | TypeScript |         26 |          0 |          7 |         33 |
+| d:\workspace\brainless-jellyfish\src\manager\message\MessageTrafficManager.ts               | TypeScript |         30 |          0 |          6 |         36 |
+| d:\workspace\brainless-jellyfish\src\manager\message\MessageTrafficTracker.ts               | TypeScript |         25 |          0 |          7 |         32 |
+| d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandBuilder.ts                | TypeScript |        108 |          0 |         17 |        125 |
+| d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandSubcommandBuilder.ts      | TypeScript |         24 |          0 |          7 |         31 |
+| d:\workspace\brainless-jellyfish\src\structures\ClientSlashCommandSubcommandGroupBuilder.ts | TypeScript |         37 |          0 |          6 |         43 |
+| d:\workspace\brainless-jellyfish\src\structures\interface\executeFunctions.ts               | TypeScript |         14 |          8 |          9 |         31 |
+| d:\workspace\brainless-jellyfish\src\test.ts                                                | TypeScript |          6 |          0 |          2 |          8 |
+| d:\workspace\brainless-jellyfish\src\utils\Logger.ts                                        | TypeScript |         80 |         33 |         16 |        129 |
+| d:\workspace\brainless-jellyfish\src\utils\builder\EmbedComponentBuilder.ts                 | TypeScript |          0 |         16 |          4 |         20 |
+| d:\workspace\brainless-jellyfish\src\utils\defaultFunctions.ts                              | TypeScript |         19 |          0 |          3 |         22 |
+| d:\workspace\brainless-jellyfish\src\utils\enums\ConnectingWordMessageType.ts               | TypeScript |          7 |          0 |          2 |          9 |
+| d:\workspace\brainless-jellyfish\src\utils\enums\LogMessageType.ts                          | TypeScript |          8 |          0 |          2 |         10 |
+| d:\workspace\brainless-jellyfish\src\utils\enums\button.ts                                  | TypeScript |         10 |          0 |          2 |         12 |
+| d:\workspace\brainless-jellyfish\src\utils\error\ClientError.ts                             | TypeScript |         55 |         98 |         23 |        176 |
+| d:\workspace\brainless-jellyfish\src\utils\error\ClientErrorHandler.ts                      | TypeScript |         96 |          4 |         22 |        122 |
+| d:\workspace\brainless-jellyfish\src\utils\functions.ts                                     | TypeScript |        170 |          2 |         26 |        198 |
+| Total                                                                                       |            |      2,716 |        202 |        577 |      3,495 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

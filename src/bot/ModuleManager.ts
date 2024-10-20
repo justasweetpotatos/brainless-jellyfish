@@ -1,4 +1,5 @@
-import ConnectingWordGameModule from "../structure/ConnectingWordGameModule";
+import { Interaction, Message } from "discord.js";
+import ConnectingWordGameModule from "../modules/ConnectingWordGameModule";
 import { Logger } from "../utils/Logger";
 import SuwaBot from "./SuwaBot";
 
@@ -15,11 +16,16 @@ export class ModuleManager {
     this.connectingWordGameModule = new ConnectingWordGameModule({ client: client, name: "connecting-word-module" });
   }
 
-  async onInteractionCreate() {
-    
+  async onInteractionCreate(interaction: Interaction) {
+    //
+  }
+
+  async onMessageCreate(message: Message){
+    this.logger.log(`From: ${message.author.globalName}, content: ${message.cleanContent}`);
+    this.connectingWordGameModule.emit("message-create", message);
   }
 
   async activateAllModule() {
-    this.connectingWordGameModule.setWorkMode("enable");
+    this.connectingWordGameModule.setWorkMode("enable").activateModule();
   }
 }

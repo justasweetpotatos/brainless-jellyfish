@@ -29,14 +29,17 @@ export abstract class BotModule extends BaseModule<BotModuleOptions> {
     this.workMode = "enable";
   }
 
+  abstract activateModule(): void;
+
   setWorkMode(mode: BotModuleWorkMode) {
     this.workMode = mode;
+    return this;
   }
 
   abstract pushInteraction(
     interaction: CommandInteraction | ChatInputCommandInteraction | ButtonInteraction | AutocompleteInteraction
   ): Promise<void>;
-  abstract pushMessage(message: Message): Promise<void>;
+  abstract pushMessageEvent(message: Message): Promise<void>;
   abstract pushGuildEvent(): Promise<void>;
   abstract pushMemberEvent(): Promise<void>;
 }

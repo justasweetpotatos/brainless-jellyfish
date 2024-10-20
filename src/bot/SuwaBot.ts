@@ -1,8 +1,10 @@
 import { Client, Collection, GatewayIntentBits, REST, version } from "discord.js";
 import { Logger, LogPrinter } from "../utils/Logger";
-import Connector from "../database/Connector";
-import ConnectingWordGameModule from "../structure/ConnectingWordGameModule";
+import Connector from "../database/connector";
+import ConnectingWordGameModule from "../modules/ConnectingWordGameModule";
 import { BotModule } from "../structure/BotModule";
+import { ModuleManager } from "./ModuleManager";
+import EventHandler from "../handler/EventHandler";
 
 export type ClientRunMode = "normal" | "debug";
 
@@ -14,9 +16,10 @@ export default class SuwaBot extends Client {
   public connector: Connector;
 
   public clientRunMode: ClientRunMode;
+  public readonly moduleManager: ModuleManager;
 
-  public readonly moduleCollection: Collection<string, BotModule>;
-  
+  public readonly eventHandler: EventHandler;
+
   constructor(botId: string) {
     super({
       intents: [
@@ -33,8 +36,9 @@ export default class SuwaBot extends Client {
     this.logger = new Logger("main", this.logPrinter);
     this.connector = new Connector(this);
     this.clientRunMode = "debug";
-    this.moduleCollection = new Collection();
+    this.moduleManager = new ModuleManager(this);
 
+    this.eventHandler = new EventHandler(this);
   }
 
   async start(token?: string) {
@@ -66,7 +70,13 @@ export default class SuwaBot extends Client {
     // this.connector =
   }
 
-  async loadPreferences() {}
+  async loadPreferences() {
+    this.eventHandler.loadEvents();
+  }
+
+  async commandLineReader() {
+    
+  }
 
   displayStatus(): void {
     this.logger.log(`Client Info: 

@@ -7,9 +7,9 @@ import {
   Collection,
   EmbedBuilder,
 } from "discord.js";
-import { BotModule } from "./BotModule";
-import { BotModuleOptions } from "./interface/module";
-import dictionary = require("./moduleData/EnglishDictionary_src-unknow.json");
+import { BotModule } from "../structure/BotModule";
+import { BotModuleOptions } from "../structure/interface/module";
+import dictionary = require("../structure/moduleData/EnglishDictionary_src-unknow.json");
 
 interface ConnectingWordChannelConfig {
   channelId: string;
@@ -47,13 +47,18 @@ export default class ConnectingWordGameModule extends BotModule {
     this.dictionary = dictionary as Dictionary;
   }
 
+  activateModule() {
+    this.on("message-create", this.pushMessageEvent);
+    this.on("message-update", this.pushMessageEvent);
+  }
+
   async pushInteraction(
     interaction: CommandInteraction | ChatInputCommandInteraction | ButtonInteraction | AutocompleteInteraction
   ): Promise<void> {
     return;
   }
 
-  async pushMessage(message: Message<true>): Promise<void> {
+  async pushMessageEvent(message: Message<true>): Promise<void> {
     if (!this.guildDataCollection.get(message.guildId ?? "")) {
       this.guildDataCollection.set(message.guildId, {
         activate: false,

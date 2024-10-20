@@ -1,20 +1,21 @@
 import { Collection } from "discord.js";
-import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
 import * as path from "path";
 import * as fs from "fs";
-import { ClientError, ErrorCode } from "../utils/error/ClientError";
-import { ExecuteEventFunction } from "../structures/interface/executeFunctions";
+import SuwaBot from "../bot/SuwaBot";
+import ClientError from "../error/ClientError";
+import { ErrorCode } from "../error/ClientErrorCode";
+import { EventExecuteFunction } from "../structure/interface/functions";
 
 class EventHandler {
-  private readonly client: SuwaClient;
+  private readonly client: SuwaBot;
   private readonly logger: Logger;
-  public eventCollection: Collection<string, ExecuteEventFunction>;
+  public eventCollection: Collection<string, EventExecuteFunction>;
 
-  constructor(client: SuwaClient) {
+  constructor(client: SuwaBot) {
     this.client = client;
-    this.logger = new Logger("event-handler", client.logSystem);
-    this.eventCollection = new Collection<string, ExecuteEventFunction>();
+    this.logger = new Logger("event-handler", client.logPrinter);
+    this.eventCollection = new Collection<string, EventExecuteFunction>();
   }
 
   loadEvents() {
@@ -37,7 +38,7 @@ class EventHandler {
         this.logger.success(`Successfully loaded all events, total ${this.eventCollection.size}!`);
       }
     } catch (error) {
-      this.client.errorHandler.handleEventError({ error: error, logger: this.logger });
+      // this.client.errorHandler.handleEventError({ error: error, logger: this.logger });
     }
   }
 }

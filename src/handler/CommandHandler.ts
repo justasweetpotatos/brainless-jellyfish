@@ -1,21 +1,22 @@
 import * as path from "path";
 import * as fs from "fs";
-import SuwaClient from "../bot";
 import { Logger } from "../utils/Logger";
 import { AutocompleteInteraction, ChatInputCommandInteraction, Collection } from "discord.js";
-import ClientSlashCommandBuilder from "../structures/ClientSlashCommandBuilder";
-import { ClientError, ErrorCode } from "../utils/error/ClientError";
+import ClientSlashCommandBuilder from "../structure/SlashCommandBuilder";
+import SuwaBot from "../bot/SuwaBot";
+import ClientError from "../error/ClientError";
+import { ErrorCode } from "../error/ClientErrorCode";
 
 class CommandHandler {
-  private readonly client: SuwaClient;
+  private readonly client: SuwaBot;
   private readonly logger: Logger;
   private readonly commandFolder: string;
 
   public commandCollection: Collection<string, ClientSlashCommandBuilder>;
 
-  constructor(client: SuwaClient) {
+  constructor(client: SuwaBot) {
     this.client = client;
-    this.logger = new Logger("command-handler", client.logSystem);
+    this.logger = new Logger("command-handler", client.logPrinter);
 
     this.commandFolder = path.join(__dirname, "../commands");
     this.commandCollection = new Collection<string, ClientSlashCommandBuilder>();
@@ -30,11 +31,11 @@ class CommandHandler {
       if (!execute) throw new ClientError("", ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID);
       await execute(this.client, interaction);
     } catch (error) {
-      await this.client.errorHandler.handleSlashCommandError({
-        error: error,
-        logger: this.logger,
-        interaction: interaction,
-      });
+      // await this.client.errorHandler.handleSlashCommandError({
+      //   error: error,
+      //   logger: this.logger,
+      //   interaction: interaction,
+      // });
     }
   }
 
@@ -47,10 +48,10 @@ class CommandHandler {
       if (!execute) throw new ClientError("", ErrorCode.EXECUTOR_UNDEFINED_OR_INVALID);
       await execute(this.client, interaction);
     } catch (error) {
-      await this.client.errorHandler.handleSlashCommandError({
-        error: error,
-        logger: this.logger,
-      });
+      // await this.client.errorHandler.handleSlashCommandError({
+      //   error: error,
+      //   logger: this.logger,
+      // });
     }
   }
 
@@ -80,10 +81,10 @@ class CommandHandler {
               ErrorCode.BUILDER_UNDEFINED_OR_INVALID
             );
         } catch (error) {
-          this.client.errorHandler.handleSlashCommandError({
-            error: error,
-            logger: this.logger,
-          });
+          // this.client.errorHandler.handleSlashCommandError({
+          //   error: error,
+          //   logger: this.logger,
+          // });
         }
     });
 

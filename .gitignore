@@ -10,3 +10,5 @@ node_modules
 
 #others
 /src/utils/log/*
+.VSCodeCounter
+temp

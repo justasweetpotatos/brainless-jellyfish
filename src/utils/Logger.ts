@@ -1,20 +1,20 @@
 import * as path from "path";
 import * as fs from "fs";
-import LogMessageType from "./enums/LogMessageType";
-import SuwaClient from "../bot";
+import { LogMessageType } from "../enum/general";
+import SuwaBot from "../bot/SuwaBot";
 
 function getStringTimestamp(date?: Date): string {
   return (date ?? new Date()).toISOString().replace(/T/, " ").replace(/\..+/, "");
 }
 
-class LogToFileSystem {
+class LogPrinter {
   public systemCreateTimestamp: Date;
   private logDir: string;
   private logFile: string;
 
-  private client: SuwaClient;
+  private client: SuwaBot;
 
-  constructor(client: SuwaClient) {
+  constructor(client: SuwaBot) {
     this.client = client;
     this.systemCreateTimestamp = new Date();
 
@@ -25,7 +25,7 @@ class LogToFileSystem {
     );
 
     if (!fs.existsSync(this.logDir)) fs.mkdirSync(this.logDir);
-    if (!fs.existsSync(this.logFile) && !(this.client.clientMode === "debug"))
+    if (!fs.existsSync(this.logFile) && !(this.client.clientRunMode === "debug"))
       fs.writeFileSync(
         this.logFile,
         `This is log create by client, created time is ${getStringTimestamp(this.systemCreateTimestamp)}.\n`
@@ -36,22 +36,22 @@ class LogToFileSystem {
    * Write message to log file
    */
   write(content: string) {
-    if (!(this.client.clientMode === "debug")) fs.appendFileSync(this.logFile, content + "\n");
+    if (!(this.client.clientRunMode === "debug")) fs.appendFileSync(this.logFile, content + "\n");
   }
 }
 
 class Logger {
   public readonly label: string;
-  public readonly system: LogToFileSystem;
+  public readonly printer: LogPrinter;
 
   /**
    *
    * @param {string} label Component label
-   * @param {LogToFileSystem} system Write to file system
+   * @param {LogPrinter} printer Write to file system
    */
-  constructor(label: string, system: LogToFileSystem) {
+  constructor(label: string, printer: LogPrinter) {
     this.label = label;
-    this.system = system;
+    this.printer = printer;
   }
 
   print(content: string, type: LogMessageType | LogMessageType.LOG, printToFile?: boolean) {
@@ -59,7 +59,7 @@ class Logger {
 
     const message = `[${logTimestamp}][${this.label.toUpperCase()}][${type.toUpperCase()}] ${content}`;
 
-    if (printToFile ?? true) this.system.write(message);
+    if (printToFile ?? true) this.printer.write(message);
 
     switch (type) {
       case LogMessageType.LOG:
@@ -125,4 +125,4 @@ class Logger {
   }
 }
 
-export { LogToFileSystem, Logger };
+export { LogPrinter, Logger };

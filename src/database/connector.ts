@@ -1,45 +1,18 @@
-import { Connection, ConnectionConfig, createConnection } from "mysql";
-import SuwaClient from "../bot";
-import { Logger } from "../utils/Logger";
+import { ConnectionOptions, createPool, Pool } from "mysql";
+import SuwaBot from "../bot/SuwaBot";
 
-class Connector {
-  private logger: Logger;
+export default class Connector {
+  private readonly client: SuwaBot;
+  private readonly connectionConfig: ConnectionOptions = {};
 
-  private client: SuwaClient;
+  private pool?: Pool;
 
-  constructor(client: SuwaClient) {
+  constructor(client: SuwaBot) {
     this.client = client;
-    this.logger = new Logger("Database", this.client.logSystem);
   }
 
-  public createConnection(config: ConnectionConfig): Connection {
-    return createConnection(config);
-  }
-
-  public async checkingConnection(conn: Connection): Promise<void> {
-    return new Promise((resolver, reject) => {
-      conn.connect((err) => {
-        this.logger.log("Checking Connection...");
-        this.logger.log("Connecting to database...");
-        if (err) return reject(err);
-
-        this.logger.success(`Connected to database ! Connection thread: ${conn.threadId}`);
-        resolver();
-      });
-    });
-  }
-
-  public async executeQuery(query: string, values: any[], connection: Connection): Promise<any> {
-    return new Promise((resolve, reject) => {
-      connection.query(query, values, (err, results) => {
-        if (err) {
-          this.logger.error(`Query execution failed: ${err}`);
-          return reject(err);
-        }
-        resolve(results);
-      });
-    });
+  createPool(connectionConfig?: ConnectionOptions) {
+    if (!connectionConfig) this.pool = createPool(this.connectionConfig);
+    else this.pool = createPool(connectionConfig);
   }
 }
-
-export default Connector;

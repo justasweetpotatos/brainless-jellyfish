@@ -1,10 +1,9 @@
-import { Client, Collection, GatewayIntentBits, REST, version } from "discord.js";
+import { Client, GatewayIntentBits, REST, version } from "discord.js";
 import { Logger, LogPrinter } from "../utils/Logger";
 import Connector from "../database/connector";
-import ConnectingWordGameModule from "../modules/ConnectingWordGameModule";
-import { BotModule } from "../structure/BotModule";
 import { ModuleManager } from "./ModuleManager";
 import EventHandler from "../handler/EventHandler";
+import { ErrorHandlerModule } from "../modules/ErrorHandlerModule";
 
 export type ClientRunMode = "normal" | "debug";
 
@@ -17,6 +16,7 @@ export default class SuwaBot extends Client {
 
   public clientRunMode: ClientRunMode;
   public readonly moduleManager: ModuleManager;
+  public readonly errorHandlerModule: ErrorHandlerModule;
 
   public readonly eventHandler: EventHandler;
 
@@ -37,6 +37,7 @@ export default class SuwaBot extends Client {
     this.connector = new Connector(this);
     this.clientRunMode = "debug";
     this.moduleManager = new ModuleManager(this);
+    this.errorHandlerModule = new ErrorHandlerModule({ client: this, name: "error-handler" });
 
     this.eventHandler = new EventHandler(this);
   }
@@ -63,6 +64,9 @@ export default class SuwaBot extends Client {
     this.logger.info("Loggin...");
     await this.login(token);
     this.logger.success("Bot is ready!");
+
+    this.moduleManager.createEventListeners();
+    await this.moduleManager.activateAllModule();
   }
 
   async loadDatabase() {
@@ -74,9 +78,7 @@ export default class SuwaBot extends Client {
     this.eventHandler.loadEvents();
   }
 
-  async commandLineReader() {
-    
-  }
+  async commandLineReader() {}
 
   displayStatus(): void {
     this.logger.log(`Client Info: 

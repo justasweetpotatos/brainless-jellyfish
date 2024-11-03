@@ -36,7 +36,7 @@ interface Dictionary {
   [key: string]: number;
 }
 
-export default class ConnectingWordGameModule extends BotModule {
+export default class ConnectingWordGameModule extends BotModule<BotModuleOptions> {
   public readonly guildDataCollection: Collection<string, ConnectingWordGuildData>;
   public readonly dictionary: Dictionary;
 
@@ -45,11 +45,6 @@ export default class ConnectingWordGameModule extends BotModule {
 
     this.guildDataCollection = new Collection();
     this.dictionary = dictionary as Dictionary;
-  }
-
-  activateModule() {
-    this.on("message-create", this.pushMessageEvent);
-    this.on("message-update", this.pushMessageEvent);
   }
 
   async pushInteraction(

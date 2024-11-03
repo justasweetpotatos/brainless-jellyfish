@@ -1,6 +1,12 @@
 import * as fs from "fs";
 import * as path from "path";
-import { AutocompleteInteraction, ChatInputCommandInteraction, Collection, SlashCommandBuilder } from "discord.js";
+import {
+  AutocompleteInteraction,
+  ChatInputCommandInteraction,
+  Collection,
+  CommandInteraction,
+  SlashCommandBuilder,
+} from "discord.js";
 import ClientSlashCommandSubcommandBuilder from "./SlashCommandSubcommandBuilder";
 import ClientSlashCommandSubcommandGroupBuilder from "./SlashCommandSubcommandGroupBuilder";
 import { CommandAutocompleteExecuteFunction, CommandExecuteFunction } from "./interface/functions";
@@ -59,16 +65,16 @@ class ClientSlashCommandBuilder extends SlashCommandBuilder {
   }
 
   static getStackName(
-    interaction: ChatInputCommandInteraction | AutocompleteInteraction,
+    interaction: CommandInteraction | ChatInputCommandInteraction | AutocompleteInteraction,
     parseStack: boolean = false
   ): string | Array<string> {
     const commandParts: Array<string> = [interaction.commandName];
 
     try {
-      commandParts.push(interaction.options.getSubcommandGroup() ?? "");
+      commandParts.push((interaction as ChatInputCommandInteraction).options.getSubcommandGroup() ?? "");
     } catch (error) {}
     try {
-      commandParts.push(interaction.options.getSubcommand() ?? "");
+      commandParts.push((interaction as ChatInputCommandInteraction).options.getSubcommand() ?? "");
     } catch (error) {}
 
     const filteredParts = commandParts.filter((item) => item !== "");

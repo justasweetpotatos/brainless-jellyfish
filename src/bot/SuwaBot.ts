@@ -13,6 +13,7 @@ export default class SuwaBot extends Client {
   public readonly logger: Logger;
   public readonly logPrinter: LogPrinter;
   public connector: Connector;
+  public startedTimestamp: number = 0;
 
   public clientRunMode: ClientRunMode;
   public readonly moduleManager: ModuleManager;
@@ -34,15 +35,18 @@ export default class SuwaBot extends Client {
 
     this.logPrinter = new LogPrinter(this);
     this.logger = new Logger("main", this.logPrinter);
-    this.connector = new Connector(this);
+    this.connector = new Connector();
     this.clientRunMode = "debug";
     this.moduleManager = new ModuleManager(this);
     this.errorHandlerModule = new ErrorHandlerModule({ client: this, name: "error-handler" });
 
     this.eventHandler = new EventHandler(this);
+
+    this.on("ready", () => this.onClientReady());
   }
 
-  async start(token?: string) {
+  async start(token: string) {
+    this.startedTimestamp = Date.now();
     if (!token) {
       this.logger.info("Token is empty !");
       this.logger.warn("Shutdown bot...");
@@ -63,15 +67,19 @@ export default class SuwaBot extends Client {
     // Login
     this.logger.info("Loggin...");
     await this.login(token);
-    this.logger.success("Bot is ready!");
+
+    this.connector.createPromisePool();
 
     this.moduleManager.createEventListeners();
     await this.moduleManager.activateAllModule();
   }
 
-  async loadDatabase() {
-    this.logger.info("Loading database.");
-    // this.connector =
+  onClientReady() {
+    this.readyTimestamp = Date.now();
+    this.moduleManager.commandModule.registerCommands();
+    this.logger.success(
+      `Bot has ready, start up took ${(this.readyTimestamp - this.startedTimestamp) / 1000} seconds`
+    );
   }
 
   async loadPreferences() {

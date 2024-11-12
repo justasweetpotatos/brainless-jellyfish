@@ -1,18 +1,27 @@
-import { ConnectionOptions, createPool, Pool } from "mysql";
+import { ConnectionOptions, createPool, Pool } from "mysql2/promise";
 import SuwaBot from "../bot/SuwaBot";
 
-export default class Connector {
-  private readonly client: SuwaBot;
-  private readonly connectionConfig: ConnectionOptions = {};
+export default class DBConnector {
+  // private readonly client: SuwaBot;
+  private readonly connectionOptions: ConnectionOptions = {
+    host: "localhost",
+    user: "root",
+    password: "MySQLServer",
+  };
 
-  private pool?: Pool;
+  public pool?: Pool;
 
-  constructor(client: SuwaBot) {
-    this.client = client;
+  constructor() {
+    // this.client = client;
   }
 
-  createPool(connectionConfig?: ConnectionOptions) {
-    if (!connectionConfig) this.pool = createPool(this.connectionConfig);
-    else this.pool = createPool(connectionConfig);
+  createPromisePool(connectionOptions?: ConnectionOptions) {
+    if (this.pool) this.pool = undefined;
+    if (connectionOptions) {
+      this.pool = createPool(connectionOptions);
+    } else {
+      this.pool = createPool(this.connectionOptions);
+    }
+    return this.pool;
   }
 }

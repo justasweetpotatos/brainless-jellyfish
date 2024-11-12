@@ -18,10 +18,10 @@ export class ModuleManager {
   private readonly logger: Logger;
 
   // system module
-  public readonly eventManagerModule: EventManagerModule;
+  // public readonly eventManagerModule: EventManagerModule;
   public readonly commandModule: CommandModule;
 
-  public readonly messageTrafficModule: MessageTrafficModule;
+  // public readonly messageTrafficModule: MessageTrafficModule;
   public readonly connectingWordGameModule: ConnectingWordGameModule;
 
   constructor(client: SuwaBot) {
@@ -29,10 +29,10 @@ export class ModuleManager {
     this.logger = new Logger("module-manager", this.client.logPrinter);
 
     // System module
-    this.eventManagerModule = new EventManagerModule({ client: client, name: "event-manager-module" });
+    // this.eventManagerModule = new EventManagerModule({ client: client, name: "event-manager-module" });
     this.commandModule = new CommandModule({ client: client, name: "command-module" });
 
-    this.messageTrafficModule = new MessageTrafficModule({ client: client, name: "message-traffic-module" });
+    // this.messageTrafficModule = new MessageTrafficModule({ client: client, name: "message-traffic-module" });
     this.connectingWordGameModule = new ConnectingWordGameModule({ client: client, name: "connecting-word-module" });
   }
 
@@ -43,7 +43,7 @@ export class ModuleManager {
   async onMessageCreate(message: Message) {
     try {
       // this.logger.log(`From: ${message.author.id}-${message.author.displayName}, content: ${message.cleanContent}`);
-      this.messageTrafficModule.emit(Events.MessageCreate, message);
+      // this.messageTrafficModule.emit(Events.MessageCreate, message);
       this.connectingWordGameModule.emit(Events.MessageCreate, message);
     } catch (error) {
       if (!(error instanceof Error)) return;
@@ -64,28 +64,32 @@ export class ModuleManager {
 
     // Interaction
     this.client.on(Events.InteractionCreate, (...args) => this.onInteractionCreate(...args));
-    // Message action
+    // Message events
     this.client.on(Events.MessageCreate, (message) => this.onMessageCreate(message));
     this.client.on(Events.MessageUpdate, (message) => this.onMessageUpdate(message));
     this.client.on(Events.MessageDelete, (message) => this.onMessageDelete(message));
     this.client.on(Events.MessageBulkDelete, (message) => this.onMessaegBulkDelete(message));
 
-    // Message interaction
-
+    // Guild events
+    
     //
 
-    this.logger.success(`Created total ${this.client.listeners.length} listerner !`);
+    this.logger.success(`Created total ${5} listerner !`);
+  }
+
+  async onClientReady() {
+    this.commandModule.registerCommands();
   }
 
   async activateAllModule() {
     this.logger.info("Activating all modules !");
-    // this.commandModule.activateModule();
-
-    // this.connectingWordGameModule.activateModule();
+    this.commandModule.activateModule();
+    this.connectingWordGameModule.activateModule();
     // this.eventManagerModule.activateModule();
-    this.messageTrafficModule.activateModule();
+    // this.messageTrafficModule.activateModule();
+    
     setInterval(() => {
-      this.messageTrafficModule.logParameter();
+      // this.messageTrafficModule.logParameter();
     }, 1000);
   }
 }

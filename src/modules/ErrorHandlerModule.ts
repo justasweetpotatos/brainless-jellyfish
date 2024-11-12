@@ -36,7 +36,7 @@ export class ErrorHandlerModule extends BotModule<ErrorHandlerModuleOptions> {
     const error = this.identifyError(data.error);
 
     if (data.interaction) return;
-    data.logger.error(error.createMessage());
+    data.logger.error(error.createMessage(true));
   }
 
   async responseSlashCommandErrorInteraction(

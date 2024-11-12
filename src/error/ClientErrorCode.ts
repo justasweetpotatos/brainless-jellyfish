@@ -20,11 +20,23 @@ enum ErrorCode {
   UNKNOWN_ERROR = "GE_300",
 
   /**
+   * Connector pool not found.
+   * @description
+   */
+  CONNECTOR_POOL_NOT_FOUND = "GE_301",
+
+  /**
+   * Execute query failed.
+   * @description check the query log.
+   */
+  EXECUTE_QUERY_FAILED = "GE_302",
+
+  /**
    * Interaction has been replied.
    * @description The interaction has already been responded to.
    * @fix Review the interaction process.
    */
-  INTERACTION_REPLIED = "GE_301",
+  INTERACTION_REPLIED = "GE_100",
 
   /**
    * No target channel.
@@ -132,6 +144,8 @@ enum ErrorCode {
  */
 const ErrorMessage: { [key in ErrorCode]: string } = {
   [ErrorCode.UNKNOWN_ERROR]: "An error occurred. Please check the logs",
+  [ErrorCode.CONNECTOR_POOL_NOT_FOUND]: "Pool to execute query is not found",
+  [ErrorCode.EXECUTE_QUERY_FAILED]: "Execute query failed, please check the log",
   [ErrorCode.NO_TARGET_CHANNEL]: "The channel is undefined or invalid",
   [ErrorCode.INTERACTION_REPLIED]: "The interaction response has been sent",
   [ErrorCode.MESSAGE_INVALID]: "The message is invalid",
